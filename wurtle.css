@@ -1,0 +1,287 @@
+:root {
+    --yellow: rgb(190, 171, 0);
+    --wrong: rgb(163, 163, 163);
+    --colorpicker: rgb(197, 72, 0);
+}
+
+body {
+    text-align: center;
+    background-color: rgb(24, 24, 24);
+    top: 0;
+}
+
+
+#WURTLE { 
+    font-family: 'Permanent Marker', Arial, Helvetica, sans-serif;
+    text-align: center;
+    color: green;
+    font-size: 3em;
+    line-height: 0;
+    text-shadow: 1px 1px 1px rgb(124, 124, 124);
+    display: inline-block;
+}
+
+h2 {
+    line-height: 0;
+    font-family: 'Permanent Marker', Arial, Helvetica, sans-serif;
+}
+
+#howToPlay {
+    padding-bottom: 8px;
+}
+
+
+.main {
+    margin: auto;
+    width: fit-content;
+    height: 100%; 
+    overflow: hidden;
+    background-image: url('./images/turtleblank.png');
+    background-size: 360px 400px;
+    background-repeat: no-repeat;
+    background-position: 50% 30%;
+}
+
+
+.qMark {
+    color:rgb(124, 124, 124);
+    font-size: 1.8em;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 2rem;
+}
+
+.scheme {
+    color:rgb(124, 124, 124);
+    font-size: 1.8em;
+    display: inline-block;
+    cursor: pointer;
+    margin-left: 2rem;
+}
+
+.directions {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    width: 100%;
+    height: 90%;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    /* padding-left: 2em;
+    padding-right: 2em; */
+    padding-top: 1em;
+    padding-bottom: 2em;
+    background-color: rgb(54, 54, 54);
+    z-index: 10;
+    display: none;
+    overflow-wrap: break-word;
+    /* border-radius: 4px; */
+    opacity: 0;
+}
+
+#colorScheme {
+    width: 100%;
+    overflow-wrap: normal;
+    padding-left: 0;
+    justify-content: center;
+}
+
+.squareGuess  {
+    /* float: left; */
+    margin: -.5px;
+    padding: 0vw;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(163, 163, 163);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 2em;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center; /* center the content horizontally */
+    align-items: center;
+    width: 3rem;
+    height: 3rem;
+}
+
+
+.squares {
+    display: inline-block;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 20px;
+    background-color: rgba(24, 24, 24, 0.8);
+    padding: 1vw;
+    width: fit-content;
+    position: relative;
+}
+
+.square  {
+    float: left;
+    margin: 2px;
+    padding: 0vw;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(163, 163, 163);
+    color: white;
+    font-family: Arial, Helvetica, sans-serif; 
+    font-size: 2.5em;
+    text-align: center;
+    display: inline-flex;
+    justify-content: center; /* center the content horizontally */
+    align-items: center;
+    width: 3.7rem;
+    height: 3.7rem;
+}
+
+/* ===================  ANIMATIONS ===================*/
+
+
+
+@media only screen and (max-width: 600px) {
+    .square {
+    }
+
+    .square .main {
+        width: 100%;
+    }
+    
+}
+
+.keyboard { 
+    margin: auto;
+    margin-top: 0px;
+    text-align: center; 
+    width: 100%;
+}
+
+table { text-align: center;}
+
+.keyboardTable {
+    margin: auto;
+    margin-top: 0px;
+    width: fit-content;
+}
+
+
+.keyBtn {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
+    color: white;
+    background-color: var(--wrong);
+    width: 2rem;
+    height: 2.5rem; 
+    border-style: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.backspace { width: 2.6rem;}
+
+.keyBtn:hover {
+    background-color: rgb(88, 88, 88);
+}
+
+#guessBtn {
+    font-size: .9em;
+    padding: 2px 5px 0px 5px;
+}
+
+.Btn {
+    width: fit-content;
+    height: 40px;
+    background-color: var(--wrong);
+    color: rgb(255, 255, 255);
+    padding: 8px;
+    border-style: none;
+    border-color: rgb(189,189,189);
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    font-style: italic;
+    border-radius: 3px;
+    box-shadow: 2px 2px 8px black;
+}
+
+.Btn:hover {
+    background-color: rgb(92, 92, 92);
+    color:rgb(255, 255, 255);
+    border-style: none;
+    border-color: rgb(168, 168, 168);
+}
+
+.schemeBtn {
+    font-size: .8rem;
+    font-style: normal;
+    margin: 20px 4px 30px;
+    width: 5rem;
+}
+
+.schemeBtn:focus {
+    border-style: solid;
+}
+
+.schemeBtn:hover {
+    border-style: solid;
+    border-color: currentColor;
+}
+
+.closeDirections {
+    width: 100px;
+    margin-top: 1em;
+}
+
+.BtnNewGame {
+    background-color: white;
+    color: black;
+    float: inherit;
+    margin-right: 15px;
+    padding: 8px 18px 8px 18px;
+}
+
+#shareIcon {
+    color:rgb(0, 0, 0);
+    padding: 8px 12px 8px 12px;
+    float: inherit;
+    margin-right: 0;
+    cursor: pointer;
+}
+
+.gameOver {
+    display: none;
+    margin: auto;
+    width: 97%;
+    height: 8.5rem;
+    background-color: green;
+    color: white;
+    border-radius: 4px;
+}
+
+.gameOver h1 {
+    font-size: 3em;
+    line-height: 0;
+    margin-top: 1.5rem;
+    padding-bottom: 8px;
+}
+
+.gameOver h2 {
+    line-height: 0;
+    margin-top: 1.5rem;
+    padding-bottom: 8px;
+}
+
+#showWord, #gameOverMsg {
+    font-family: 'Permanent Marker', cursive;
+    color: white;
+    display: none;
+}
+
+
+.schemeRow {
+    display: flex;
+    justify-content: left;
+    margin-left: 4rem;
+    margin-bottom: 8px;
+}

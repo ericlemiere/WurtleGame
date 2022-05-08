@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="description" content="WURTLE">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Wurtle</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+    <link rel="stylesheet" type="text/css" href="./wurtle.css">
+    <!-- <link rel="icon" type="image/x-icon" href="images/favicon.ico"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">   
+    <script src="https://kit.fontawesome.com/c2941ef83e.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <div class="app" id="app">
+        <div class="main">
+            <!-- <div style="position: relative; width: 0; height: 0"> -->
+            <div>    
+                <div class="qMark" id="qMark" onclick="showDirections(1)"><i class="fa-solid fa-circle-question"></i></div>
+                <h1 id="WURTLE">WURTLE</h1>
+                <div class="scheme" id="scheme" onclick="showColorSchemes(1)"><i id="schemeID" class="fa-solid fa-palette"></i></div>
+            </div>
+            
+            
+
+            <div class="squares">
+                
+<!-- DIRECTIONS DIV -->
+                <div class="directions" id="directions">
+                    <div style="margin: 0px 30px;">
+                    <h2 id="howToPlay">How to play:</h2>
+                    <p>The goal is to correctly guess the 5-letter word. Guess any 5-letter word:</p>
+                    <div class="row">
+                        <div class="squareGuess" id="directions1" style="background-color: rgb(163, 163, 163);">G</div>
+                        <div class="squareGuess directionsRightSpot" id="directionsRightSpot" style="background-color: green;">U</div>
+                        <div class="squareGuess directionsRightLetter" id="directionsRightLetter" style="background-color: rgb(156, 141, 0);">E</div>
+                        <div class="squareGuess" id="directions4" style="background-color: rgb(163, 163, 163);">S</div>
+                        <div class="squareGuess" id="directions5" style="background-color: rgb(163, 163, 163);">S</div>
+                    </div>
+                    <p>A gray square means the word does not contain that letter.</p>
+                    <p>A <span class="directionsColorWordRightLetter" id="directionsColorWordRightLetter" style="color: rgb(156, 141, 0);">yellow</span> square means the word contains that letter, but it is in the wrong position.</p>
+                    <p>A <span class="directionsColorWordRightSpot" id="directionsColorWordRightSpot" style="color: green;">green</span> square means the letter is in the word and in the correct position.</p>
+                    
+                    <button class="Btn closeDirections" onclick="showDirections(1)">Close</button>
+                    </div>
+                </div>
+
+<!-- COLOR SCHEME DIV -->
+                <div class="directions" id="colorScheme">
+                    <h2 id="">Pick a Color Scheme:</h2>
+                    
+                    <button type="button" class="Btn schemeBtn" onclick="colorSchemeSelector(1)">Standard</button>
+                    <button type="button" class="Btn schemeBtn" onclick="colorSchemeSelector(2)">Miami</button>
+                    <button type="button" class="Btn schemeBtn" onclick="colorSchemeSelector(3)">Autumn</button>
+
+                    <div class="row">
+                        <div class="squareGuess" id="directions1" style="background-color: rgb(163, 163, 163);">G</div>
+                        <div class="squareGuess directionsRightSpot" style="background-color: green;">U</div>
+                        <div class="squareGuess directionsRightLetter" style="background-color: rgb(156, 141, 0);">E</div>
+                        <div class="squareGuess" id="directions4" style="background-color: rgb(163, 163, 163);">S</div>
+                        <div class="squareGuess" id="directions5" style="background-color: rgb(163, 163, 163);">S</div>
+                    </div>
+
+                    <br><br>
+                    <div class="schemeRow">
+                        <div class="squareGuess directionsRightSpot" style="background-color: green; margin-right: 12px;">U</div>
+                        <p>Right letter, right spot</p>
+                    </div>
+                    <div class="schemeRow">
+                        <div class="squareGuess directionsRightLetter" style="background-color: rgb(156, 141, 0); margin-right: 12px;">E</div>
+                        <p>Right letter, wrong spot</p>
+                    </div>
+
+                    <button class="Btn closeDirections" onclick="showColorSchemes(1)">Close</button>
+                </div>
+
+<!-- SQUARES -->
+                <div class="row">
+                    <div class="square" id="r1c0"></div>
+                    <div class="square" id="r1c1"></div>
+                    <div class="square" id="r1c2"></div>
+                    <div class="square" id="r1c3"></div>
+                    <div class="square" id="r1c4"></div>
+                </div>
+                <div class="row">
+                    <div class="square" id="r2c0"></div>
+                    <div class="square" id="r2c1"></div>
+                    <div class="square" id="r2c2"></div>
+                    <div class="square" id="r2c3"></div>
+                    <div class="square" id="r2c4"></div>
+                </div>
+                <div class="row">
+                    <div class="square" id="r3c0"></div>
+                    <div class="square" id="r3c1"></div>
+                    <div class="square" id="r3c2"></div>
+                    <div class="square" id="r3c3"></div>
+                    <div class="square" id="r3c4"></div>
+                </div>
+                <div class="row">
+                    <div class="square" id="r4c0"></div>
+                    <div class="square" id="r4c1"></div>
+                    <div class="square" id="r4c2"></div>
+                    <div class="square" id="r4c3"></div>
+                    <div class="square" id="r4c4"></div>
+                </div>
+                <div class="row">
+                    <div class="square" id="r5c0"></div>
+                    <div class="square" id="r5c1"></div>
+                    <div class="square" id="r5c2"></div>
+                    <div class="square" id="r5c3"></div>
+                    <div class="square" id="r5c4"></div>
+                </div>
+                <div class="row">
+                    <div class="square" id="r6c0"></div>
+                    <div class="square" id="r6c1"></div>
+                    <div class="square" id="r6c2"></div>
+                    <div class="square" id="r6c3"></div>
+                    <div class="square" id="r6c4"></div>
+                </div>
+            </div>
+
+<!-- GAME OVER DIV -->
+            <div class="gameOver" id="gameOver">
+                <br>
+                <h2 id="showWord"></h2>
+                <h1 id="gameOverMsg">You WIN!</h1>
+                <!-- <button class="Btn BtnNewGame" onclick="resetGame();">Play Again</button> -->
+                <button class="Btn BtnNewGame" onclick="window.location.reload();">Play Again</button>
+                <button class="Btn BtnNewGame" id="shareIcon" onclick="printShareSquares()"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+            </div>
+
+<!-- KEYBOARD -->
+            <div class="keyboard" id="keyboard">
+                <table class="keyboardTable">
+                    <tr>
+                        <td class="keyBtn" id="btnQ" onclick="keyboard('Q')">Q</td>
+                        <td class="keyBtn" id="btnW" onclick="keyboard('W')">W</td>
+                        <td class="keyBtn" id="btnE" onclick="keyboard('E')">E</td>
+                        <td class="keyBtn" id="btnR" onclick="keyboard('R')">R</td>
+                        <td class="keyBtn" id="btnT" onclick="keyboard('T')">T</td>
+                        <td class="keyBtn" id="btnY" onclick="keyboard('Y')">Y</td>
+                        <td class="keyBtn" id="btnU" onclick="keyboard('U')">U</td>
+                        <td class="keyBtn" id="btnI" onclick="keyboard('I')">I</td>
+                        <td class="keyBtn" id="btnO" onclick="keyboard('O')">O</td>
+                        <td class="keyBtn" id="btnP" onclick="keyboard('P')">P</td>
+                    </tr>
+                </table>
+                <table class="keyboardTable">
+                    <tr>
+                        <td class="keyBtn" id="btnA" onclick="keyboard('A')">A</td>
+                        <td class="keyBtn" id="btnS" onclick="keyboard('S')">S</td>
+                        <td class="keyBtn" id="btnD" onclick="keyboard('D')">D</td>
+                        <td class="keyBtn" id="btnF" onclick="keyboard('F')">F</td>
+                        <td class="keyBtn" id="btnG" onclick="keyboard('G')">G</td>
+                        <td class="keyBtn" id="btnH" onclick="keyboard('H')">H</td>
+                        <td class="keyBtn" id="btnJ" onclick="keyboard('J')">J</td>
+                        <td class="keyBtn" id="btnK" onclick="keyboard('K')">K</td>
+                        <td class="keyBtn" id="btnL" onclick="keyboard('L')">L</td>
+                    </tr>
+                </table>
+                <table class="keyboardTable">  
+                    <tr>
+                        <td class="keyBtn" id="guessBtn" onclick="submitGuess();nextLine();">GUESS</td>
+                        <td class="keyBtn" id="btnZ" onclick="keyboard('Z')">Z</td>
+                        <td class="keyBtn" id="btnX" onclick="keyboard('X')">X</td>
+                        <td class="keyBtn" id="btnC" onclick="keyboard('C')">C</td>
+                        <td class="keyBtn" id="btnV" onclick="keyboard('V')">V</td>
+                        <td class="keyBtn" id="btnB" onclick="keyboard('B')">B</td>
+                        <td class="keyBtn" id="btnN" onclick="keyboard('N')">N</td>
+                        <td class="keyBtn" id="btnM" onclick="keyboard('M')">M</td>
+                        <td class="keyBtn backspace" id="btnxxx" onclick="keyboard('xxx')">&#8678;</td>
+                    </tr>
+                </table>
+            </div>  
+        </div>
+    </div>
+
+
+    <script src="wurtle.js"></script>
+</body>
+</html>
