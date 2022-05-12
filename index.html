@@ -39,12 +39,12 @@
                     <div class="row">
                         <div class="squareGuess" id="directions1" style="background-color: rgb(163, 163, 163);">G</div>
                         <div class="squareGuess directionsRightSpot" id="directionsRightSpot" style="background-color: green;">U</div>
-                        <div class="squareGuess directionsRightLetter" id="directionsRightLetter" style="background-color: rgb(156, 141, 0);">E</div>
+                        <div class="squareGuess directionsRightLetter" id="directionsRightLetter" style="background-color: rgb(190, 171, 0);">E</div>
                         <div class="squareGuess" id="directions4" style="background-color: rgb(163, 163, 163);">S</div>
                         <div class="squareGuess" id="directions5" style="background-color: rgb(163, 163, 163);">S</div>
                     </div>
                     <p>A gray square means the word does not contain that letter.</p>
-                    <p>A <span class="directionsColorWordRightLetter" id="directionsColorWordRightLetter" style="color: rgb(156, 141, 0);">yellow</span> square means the word contains that letter, but it is in the wrong position.</p>
+                    <p>A <span class="directionsColorWordRightLetter" id="directionsColorWordRightLetter" style="color: rgb(190, 171, 0);">yellow</span> square means the word contains that letter, but it is in the wrong position.</p>
                     <p>A <span class="directionsColorWordRightSpot" id="directionsColorWordRightSpot" style="color: green;">green</span> square means the letter is in the word and in the correct position.</p>
                     
                     <button class="Btn closeDirections" onclick="showDirections(1)">Close</button>
@@ -62,7 +62,7 @@
                     <div class="row">
                         <div class="squareGuess" id="directions1" style="background-color: rgb(163, 163, 163);">G</div>
                         <div class="squareGuess directionsRightSpot" style="background-color: green;">U</div>
-                        <div class="squareGuess directionsRightLetter" style="background-color: rgb(156, 141, 0);">E</div>
+                        <div class="squareGuess directionsRightLetter" style="background-color: rgb(190, 171, 0);">E</div>
                         <div class="squareGuess" id="directions4" style="background-color: rgb(163, 163, 163);">S</div>
                         <div class="squareGuess" id="directions5" style="background-color: rgb(163, 163, 163);">S</div>
                     </div>
@@ -70,11 +70,11 @@
                     <br><br>
                     <div class="schemeRow">
                         <div class="squareGuess directionsRightSpot" style="background-color: green; margin-right: 12px;">U</div>
-                        <p>Right letter, right spot</p>
+                        <p>Right letter, right position</p>
                     </div>
                     <div class="schemeRow">
-                        <div class="squareGuess directionsRightLetter" style="background-color: rgb(156, 141, 0); margin-right: 12px;">E</div>
-                        <p>Right letter, wrong spot</p>
+                        <div class="squareGuess directionsRightLetter" style="background-color: rgb(190, 171, 0); margin-right: 12px;">E</div>
+                        <p>Right letter, wrong position</p>
                     </div>
 
                     <button class="Btn closeDirections" onclick="showColorSchemes(1)">Close</button>
@@ -128,10 +128,10 @@
 <!-- GAME OVER DIV -->
             <div class="gameOver" id="gameOver">
                 <br>
+                <h1 id="gameOverMsg"></h1>
                 <h2 id="showWord"></h2>
-                <h1 id="gameOverMsg">You WIN!</h1>
-                <!-- <button class="Btn BtnNewGame" onclick="resetGame();">Play Again</button> -->
-                <button class="Btn BtnNewGame" onclick="window.location.reload();">Play Again</button>
+                <button class="Btn BtnNewGame" onclick="resetGame();">Play Again</button>
+                <!-- <button class="Btn BtnNewGame" onclick="window.location.reload();">Play Again</button> -->
                 <button class="Btn BtnNewGame" id="shareIcon" onclick="printShareSquares()"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
             </div>
 

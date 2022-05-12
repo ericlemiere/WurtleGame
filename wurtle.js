@@ -4,10 +4,11 @@ let colorRightLetter = "rgb(190, 171, 0)";
 let colorWrong = "rgb(129, 129, 129)";
 let winSquareBorderColor = "rgb(30, 255, 0)";
 var wurtleTitle = document.getElementById("WURTLE");
+var numberOfWordsInArray = 4484;
 
 
 // RANDOM NUMBER GENERATOR
-var arrayIndex = Math.floor(Math.random() * 370);
+var arrayIndex = Math.floor(Math.random() * numberOfWordsInArray);
 
 
 
@@ -157,7 +158,7 @@ const words = [
     "fauns", "faves", "favor", "fawns", "fawny", "faxed", "faxes", "fazed", "fazes", "fears",
     "feast", "feats", "fecal", "feces", "feeds", "feels", "feign", "feint", "feist", "fella",
     "fells", "felon", "felts", "femes", "femme", "femur", "fence", "fends", "feral", "ferns",
-    "ferry", "fetal", "fetch", "fetor", "fetus", "feuds", "feued", "fever", "fewer", "fiats",
+    "ferry", "fetal", "fetch", "fetor", "fetus", "feuds", "fever", "fewer", "fiats", "zippy", 
     "fiber", "ficus", "field", "fiend", "fiery", "fifth", "fifty", "fight", "filed", "filer",
     "files", "filet", "fills", "films", "filmy", "filth", "filum", "final", "finch", "finds",
     "fined", "finer", "fines", "fired", "firer", "fires", "firms", "first", "fishy", "fists",
@@ -250,29 +251,222 @@ const words = [
     "loops", "loopy", "loose", "loots", "lords", "loser", "loses", "lotto", "lousy", "loved",
     "lover", "loves", "lowed", "lower", "lowly", "loyal", "lubed", "lubes", "lucid", "lucks",
     "lucky", "lulls", "lumen", "lumps", "lumpy", "lunar", "lunch", "lunge", "lungs", "lupus",
-    "lurch", "lured", "lures", "lurid", "lurks", "lusts", "lutes", 
+    "lurch", "lured", "lures", "lurid", "lurks", "lusts", "lutes", "mutes", "mutts", "myopy",
+    "macaw", "maced", "maces", "macho", "machs", "macks", "macro", "madam", "madly", "myrrh",
+    "madre", "mafia", "mages", "magic", "magma", "magot", "maids", "mails", "maims", "mains",
+    "maize", "major", "maker", "makes", "males", "malls", "malms", "malmy", "malts", "malty",
+    "mamas", "mamba", "mamma", "mammy", "maned", "manes", "mange", "mango", "mangy", "mania",
+    "manic", "manly", "manna", "manor", "maple", "march", "marcs", "mares", "marks", "marls",
+    "marly", "marry", "marse", "marsh", "marts", "mashy", "masks", "mason", "masse", "masts",
+    "match", "mated", "mater", "mates", "matey", "matte", "matza", "mauds", "mauls", "mauve",
+    "maven", "mawed", "maxes", "maxim", "maybe", "mayor", "mazed", "mazes", "meads", "meals",
+    "mealy", "means", "meant", "meany", "meats", "meaty", "mecca", "medal", "media", "medic",
+    "meeds", "meets", "melds", "melee", "melon", "melts", "memes", "memos", "mends", "mensa",
+    "mense", "menus", "meows", "mercy", "meres", "merge", "merit", "merks", "merle", "merls",
+    "merry", "messy", "metal", "meter", "metro", "mewed", "micro", "midge", "midst", "miens",
+    "miffs", "might", "miked", "mikes", "milch", "miler", "miles", "milks", "milky", "mills",
+    "mimed", "mimer", "mimes", "mimic", "mince", "minds", "mined", "miner", "mines", "minis",
+    "minks", "minny", "minor", "mints", "minty", "minus", "mired", "mires", "mirks", "mirky",
+    "mirth", "miser", "mises", "missy", "mists", "misty", "miter", "mites", "mitts", "mixed",
+    "mixer", "mixes", "mixup", "mizen", "moans", "moats", "mocha", "mocks", "modal", "model",
+    "modem", "modes", "modus", "mogul", "moils", "moist", "molar", "molds", "moldy", "moles",
+    "molly", "molts", "momma", "mommy", "mondo", "money", "mongo", "monos", "monte", "month",
+    "mooch", "moods", "moody", "mooed", "moons", "moors", "moose", "moots", "moped", "moper",
+    "mopes", "mopey", "moral", "mores", "morns", "moron", "morph", "morse", "morts", "mosey",
+    "mossy", "mosts", "motel", "motes", "motet", "moths", "motif", "motor", "motto", "mould",
+    "moult", "mound", "mount", "mourn", "mouse", "mousy", "mouth", "moved", "mover", "moves",
+    "movie", "mowed", "mower", "moxie", "mucks", "mucky", "mucus", "muddy", "muffs", "muggs",
+    "muggy", "mulch", "muled", "mules", "mulls", "mummy", "mumps", "mumus", "munch", "mural",
+    "mured", "mures", "murex", "murid", "murks", "murky", "mused", "muser", "muses", "mushy",
+    "music", "musks", "musky", "musts", "musty", "mutch", "muted", "nutsy", "nutty", "nylon",
+    "naans", "nacho", "naggy", "nails", "naive", "naked", "named", "names", "nance", "nancy",
+    "nanny", "napes", "nappy", "narco", "narcs", "nards", "narks", "nasal", "nasty", "natal",
+    "naval", "navel", "neaps", "nears", "neath", "neats", "necks", "needs", "needy", "neigh",
+    "nelly", "neons", "nerds", "nerdy", "nerve", "nests", "never", "newer", "newly", "newsy",
+    "newts", "nexus", "nicer", "niche", "nicks", "niece", "nieve", "nifty", "nighs", "night",
+    "nihil", "nines", "ninja", "ninny", "ninth", "nippy", "nites", "nitro", "nixed", "nixes",
+    "nobby", "noble", "nobly", "nocks", "nodal", "nodes", "noels", "nohow", "noise", "zings", 
+    "noisy", "nomad", "nooks", "nooky", "noons", "noose", "norms", "north", "nosed", "noses",
+    "nosey", "notch", "noted", "notes", "nouns", "novel", "nubby", "nudes", "nudge", "nuked",
+    "nukes", "nulls", "numbs", "numen", "nurds", "nurls", "nurse", "oxlip", "oyers", "oxide",
+    "oaken", "oared", "oases", "oasis", "oasts", "oaths", "obese", "obeys", "obits", "oboes",
+    "occur", "ocean", "octal", "octan", "octet", "octyl", "oculi", "odder", "oddly", "odors",
+    "offed", "offer", "often", "ofter", "ogled", "ogler", "ogles", "ogres", "oiled", "oiler",
+    "oinks", "olden", "older", "oldie", "olive", "ombre", "omega", "omens", "omits", "onery",
+    "onion", "onset", "oohed", "oomph", "oozed", "oozes", "opals", "opens", "opera", "opine",
+    "oping", "opium", "opted", "optic", "orals", "orate", "orbed", "orbit", "orcas", "orcin",
+    "order", "organ", "ortho", "orzos", "osmic", "ostia", "other", "otter", "ought", "ounce",
+    "ousts", "outdo", "outed", "outer", "outgo", "ovals", "ovary", "ovate", "ovens", "overs",
+    "overt", "ovine", "ovule", "owing", "owlet", "owned", "owner", "oxbow", "oxeye", "pyres",
+    "paced", "pacer", "paces", "packs", "pacts", "paddy", "padre", "pagan", "paged", "pager",
+    "pages", "pails", "pains", "paint", "pairs", "paled", "pales", "palms", "palsy", "panda",
+    "paned", "panel", "panes", "pangs", "panic", "pansy", "pants", "panty", "papal", "papas",
+    "paper", "parch", "pared", "parer", "pares", "parka", "parks", "parse", "parts", "party",
+    "parvo", "passe", "pasta", "pasts", "pasty", "patch", "paths", "patio", "patsy", "patty",
+    "pause", "paved", "paver", "paves", "pawed", "pawns", "payed", "payee", "payer", "peace",
+    "peach", "peaks", "peaky", "peals", "pearl", "pears", "peavy", "pecan", "pecks", "pedal",
+    "peeks", "peels", "peeps", "peers", "peeve", "pelts", "penal", "pends", "penne", "penny",
+    "peons", "peony", "peppy", "perch", "peril", "perks", "perky", "perms", "perps", "perry",
+    "pesky", "pesos", "pesto", "pests", "pesty", "petal", "peter", "petit", "petty", "pewee",
+    "phase", "phone", "phono", "phony", "photo", "piano", "picks", "picky", "piece", "piers",
+    "piety", "piggy", "pigmy", "piked", "piker", "pikes", "pilaf", "piled", "pills", "pilot",
+    "pimps", "pinch", "pined", "pines", "piney", "pings", "pinks", "pinky", "pinot", "pinto",
+    "pints", "pinup", "pious", "piped", "piper", "pipes", "pipet", "pique", "pitas", "pitch",
+    "pithy", "pivot", "pixel", "pixie", "pizza", "place", "plaid", "plain", "plane", "plank",
+    "plans", "plant", "plate", "plays", "plaza", "plead", "pleas", "pleat", "plebe", "plebs",
+    "plied", "plier", "plies", "plink", "plods", "plonk", "plops", "plots", "plows", "ploys",
+    "pluck", "plugs", "plumb", "plume", "plump", "plums", "plumy", "plunk", "plush", "plyer",
+    "poach", "pocks", "poems", "poets", "point", "poise", "poked", "poker", "pokes", "pokey",
+    "polar", "poled", "poler", "poles", "polio", "polis", "polka", "polls", "polos", "polyp",
+    "ponce", "ponds", "pones", "pongs", "pooch", "poofs", "poohs", "pooka", "pools", "poons",
+    "poops", "popes", "poppa", "poppy", "porch", "pored", "pores", "porks", "porky", "porno",
+    "ports", "posed", "poser", "poses", "posit", "posse", "posts", "potty", "pouch", "poult",
+    "pound", "pours", "pouts", "pouty", "power", "poyou", "prank", "prawn", "prays", "preps",
+    "press", "preys", "price", "prick", "pricy", "pride", "pried", "prier", "pries", "prime",
+    "primo", "primp", "prims", "print", "prior", "prism", "priss", "privy", "prize", "probe",
+    "prods", "profs", "promo", "proms", "prone", "prong", "proof", "props", "prose", "proud",
+    "prove", "prowl", "prows", "proxy", "prude", "prune", "pryer", "psalm", "pshaw", "psoas",
+    "psych", "pubes", "pubic", "pucks", "pudgy", "puffs", "puffy", "puked", "pukes", "pulls",
+    "pulps", "pulpy", "pulse", "pumas", "pumps", "punch", "punks", "punky", "punny", "punts",
+    "pupae", "pupal", "pupas", "pupil", "puppy", "puree", "purer", "purge", "purrs", "purse",
+    "pushy", "putts", "putty", "pygmy", "pylon", "quips", "quirk", "quite", "quits", "quota",
+    "quack", "quads", "quags", "quail", "qualm", "quant", "quark", "quart", "quash", "quasi",
+    "quate", "quays", "queen", "queer", "quell", "query", "quest", "queue", "quick", "quids",
+    "quiet", "quill", "quilt", "rungs", "runts", "rupee", "rural", "rusts", "rumor", "rumps",
+    "rabbi", "rabid", "raced", "racer", "races", "racks", "radar", "radii", "radio", "radon",
+    "rafts", "raged", "rages", "raids", "rails", "rains", "rainy", "raise", "raked", "rakes",
+    "rales", "rally", "ralph", "ramen", "ramps", "ranch", "randy", "range", "rangy", "ranks",
+    "rants", "rapid", "rarer", "rasps", "raspy", "rated", "rates", "ratio", "ravel", "raven",
+    "raver", "raves", "rawer", "razed", "razes", "razor", "reach", "react", "readd", "reads",
+    "ready", "realm", "reals", "reams", "reaps", "rears", "rebar", "rebel", "rebut", "recap",
+    "recon", "recur", "redid", "redos", "redye", "reeds", "reedy", "reefs", "reeks", "reels",
+    "refer", "refit", "refry", "regal", "rehab", "reign", "reins", "rekey", "relax", "relay",
+    "relic", "remit", "remix", "renal", "rends", "renew", "rents", "repay", "repel", "reply",
+    "repos", "rerun", "reset", "resin", "resow", "rests", "retro", "retry", "revel", "rewax",
+    "rewed", "rhino", "rhyme", "riced", "rider", "rides", "ridge", "riffs", "rifle", "rifts",
+    "right", "rigid", "rigor", "riled", "riles", "rinds", "rings", "rinks", "rinse", "riots",
+    "ripen", "risen", "riser", "rises", "risks", "risky", "rites", "ritzy", "rival", "river",
+    "rivet", "roach", "roads", "roams", "roars", "roast", "robed", "robes", "robin", "robot",
+    "rocks", "rocky", "rodeo", "roger", "rogue", "roles", "rolls", "romeo", "romps", "roofs",
+    "rooms", "roomy", "roose", "roost", "roots", "roped", "ropes", "ropey", "roque", "rosed",
+    "roses", "rosin", "rotor", "rotos", "rouge", "rough", "round", "roust", "route", "routs",
+    "roved", "rover", "roves", "rowdy", "rowed", "rower", "royal", "ruble", "ruder", "ruffs",
+    "rugby", "ruing", "ruins", "ruled", "ruler", "rules", "rumba", "rummy", "synth", "syren",
+    "saber", "sable", "sacks", "sadly", "safer", "safes", "saggy", "sails", "saint", "sakes",
+    "salad", "salal", "sales", "sally", "salon", "salsa", "salts", "salty", "salve", "samba",
+    "sands", "sandy", "sappy", "sarge", "sassy", "satin", "sauce", "saucy", "sauna", "saute",
+    "saved", "saver", "saves", "savor", "savvy", "sawed", "saxes", "sayer", "scabs", "scald",
+    "scale", "scalp", "scaly", "scamp", "scams", "scans", "scape", "scare", "scarf", "scars",
+    "scary", "scats", "scene", "scent", "schmo", "scion", "scoff", "scold", "scone", "scoop",
+    "scoot", "scope", "score", "scour", "scout", "scowl", "scrag", "scram", "scrap", "scree",
+    "screw", "scrim", "scrip", "scrub", "scrum", "scuba", "scuff", "sculk", "sculp", "seals",
+    "seams", "sears", "seats", "sects", "seeds", "seedy", "seeks", "seems", "seeps", "seize",
+    "selah", "sells", "semen", "semis", "sends", "sense", "sepia", "serfs", "serif", "serum",
+    "serve", "setup", "seven", "sever", "sewed", "sewer", "sexes", "sexts", "shack", "shade",
+    "shady", "shaft", "shags", "shake", "shaky", "shale", "shall", "shame", "shams", "shank",
+    "shape", "shard", "share", "shark", "sharp", "shaul", "shave", "shawl", "shear", "sheds",
+    "sheen", "sheep", "sheer", "sheet", "sheik", "shelf", "sheol", "shews", "shied", "shies",
+    "shift", "shims", "shine", "shins", "shiny", "ships", "shire", "shirk", "shirt", "shlep",
+    "shock", "shoed", "shoes", "shone", "shook", "shoos", "shoot", "shops", "shore", "shorn",
+    "short", "shots", "shout", "shove", "shown", "shows", "showy", "shred", "shrew", "shrub",
+    "shrug", "shtik", "shuck", "shuns", "shush", "shute", "shuts", "shyly", "sicko", "sicks",
+    "sided", "sides", "sidle", "siege", "sieve", "sifts", "sighs", "sight", "sigma", "signs",
+    "sikes", "silks", "silky", "sills", "silly", "silos", "silty", "since", "sines", "sinew",
+    "singe", "sings", "sinks", "sinus", "sired", "siren", "sires", "sissy", "sitar", "sited",
+    "sites", "situp", "sixes", "sixth", "sixty", "sized", "sizes", "skags", "skate", "skeet",
+    "skews", "skids", "skier", "skies", "skiff", "skill", "skimp", "skims", "skink", "skins",
+    "skips", "skirt", "skits", "skulk", "skull", "skunk", "slabs", "slack", "slain", "slant",
+    "slaps", "slash", "slate", "slats", "slave", "slaws", "slays", "sleds", "sleek", "sleep",
+    "sleet", "slept", "slice", "slick", "slide", "slime", "slims", "slimy", "sling", "slink",
+    "slips", "slits", "slobs", "slogs", "sloop", "slope", "slops", "slosh", "sloth", "slots",
+    "slows", "slugs", "slump", "slums", "slung", "slurb", "slurp", "slurs", "slush", "slyly",
+    "smack", "small", "smart", "smash", "smear", "smell", "smelt", "smile", "smirk", "smite",
+    "smith", "smock", "smoke", "smoky", "smolt", "snack", "snafu", "snags", "snail", "snake",
+    "snaky", "snaps", "snare", "snark", "snarl", "sneak", "sneer", "snide", "sniff", "snipe",
+    "snips", "snobs", "snogs", "snoop", "snore", "snort", "snots", "snout", "snows", "snowy",
+    "snubs", "snuck", "snuff", "soaks", "soaps", "soapy", "soars", "sober", "socks", "sofas",
+    "softy", "soggy", "soils", "solar", "soled", "soles", "solid", "solos", "solve", "sonar",
+    "songs", "sonic", "sooth", "sooty", "sorry", "sorts", "souls", "sound", "soups", "soupy",
+    "sours", "south", "sowed", "sower", "space", "spade", "spake", "spank", "spans", "spare",
+    "spark", "spars", "spasm", "spats", "spawn", "spays", "speak", "spear", "speck", "specs",
+    "speed", "spell", "spelt", "spend", "spent", "sperm", "spews", "spice", "spicy", "spied",
+    "spiel", "spier", "spies", "spike", "spiky", "spill", "spilt", "spine", "spins", "spiny",
+    "spire", "spirt", "spite", "spits", "splat", "split", "spoil", "spoke", "spoof", "spook",
+    "spool", "spore", "sport", "spots", "spout", "spray", "spree", "sprig", "sprit", "spuds",
+    "spume", "spunk", "spurn", "spurs", "spurt", "squad", "squat", "squib", "squid", "stabs",
+    "stack", "staff", "stage", "stags", "stain", "stair", "stake", "stale", "stalk", "stall",
+    "stamp", "stand", "stank", "staph", "stare", "stark", "stars", "start", "stash", "state",
+    "stats", "stave", "stays", "stead", "steak", "steal", "steam", "steed", "steel", "steep",
+    "steer", "stein", "stems", "steps", "stern", "stews", "stick", "stiff", "still", "stimy",
+    "sting", "stink", "stint", "stirs", "stock", "stogy", "stoic", "stoke", "stole", "stomp",
+    "stone", "stony", "stood", "stool", "stoop", "stops", "stork", "storm", "story", "stout",
+    "stove", "stows", "strap", "straw", "stray", "strep", "strip", "strum", "strut", "stubs",
+    "stuck", "studs", "study", "stuff", "stump", "stung", "stunk", "stuns", "stunt", "stupe",
+    "styed", "styes", "style", "stymy", "suave", "sucks", "sucre", "sudor", "sudsy", "suede",
+    "sugar", "suing", "suite", "suits", "sulks", "sulky", "sumos", "sunny", "sunup", "super",
+    "supes", "surer", "surfs", "surge", "surly", "sushi", "swabs", "swain", "swamp", "swank",
+    "swans", "swaps", "sware", "swarm", "swath", "swats", "sways", "swear", "sweat", "sweep",
+    "sweet", "swell", "swept", "swift", "swigs", "swill", "swims", "swine", "swing", "swipe",
+    "swirl", "swish", "swoon", "swoop", "sword", "swore", "sworn", "swung", "synch", "syncs",
+    "tabby", "table", "taboo", "tacet", "tacit", "tacks", "tacky", "tacos", "taffy", "tails",
+    "taint", "taken", "taker", "takes", "tales", "talks", "talky", "tally", "talon", "tamed",
+    "tamer", "tames", "tamps", "tango", "tangs", "tangy", "tanka", "tanks", "tapas", "taped",
+    "tapes", "tardy", "tared", "tares", "tarot", "tarry", "tarts", "tasks", "taste", "tasty",
+    "tater", "taunt", "taupe", "taxed", "taxes", "taxis", "teach", "teams", "tears", "teary",
+    "tease", "teddy", "teems", "teens", "teeny", "teeth", "tells", "tempo", "temps", "tempt",
+    "tends", "tenet", "tenor", "tense", "tenth", "tents", "tepee", "tepid", "terms", "terra",
+    "terry", "terse", "tesla", "tests", "testy", "tetra", "texts", "thank", "thaws", "theft",
+    "their", "theme", "there", "these", "thick", "thief", "thigh", "thine", "thing", "think",
+    "thins", "third", "thong", "thorn", "those", "three", "threw", "throb", "throe", "throw",
+    "thuds", "thugs", "thumb", "thump", "thyme", "tiara", "tibia", "ticks", "tidal", "tides",
+    "tiers", "tiger", "tight", "tigon", "tikes", "tilde", "tiled", "tiler", "tiles", "tills",
+    "tilts", "timed", "timer", "times", "timid", "tined", "tines", "tinge", "tings", "tinny",
+    "tints", "tipsy", "tired", "tires", "titan", "tithe", "title", "toads", "toast", "today",
+    "toddy", "togas", "toils", "toked", "token", "toker", "tokes", "tolls", "tombs", "tommy",
+    "tonal", "toned", "toner", "tones", "tongs", "tonic", "tools", "toons", "tooth", "toots",
+    "topaz", "topic", "torah", "torch", "toros", "torso", "torte", "torts", "total", "toted",
+    "totem", "totes", "touch", "tough", "tours", "touts", "towed", "towel", "tower", "towns",
+    "towny", "toxic", "toxin", "toyed", "trace", "track", "tract", "trail", "train", "trait",
+    "tramp", "trams", "traps", "trash", "tread", "treat", "trees", "treks", "trend", "triad",
+    "trial", "tribe", "trick", "tried", "tries", "trike", "trims", "trios", "tripe", "trips",
+    "troll", "troop", "trope", "trots", "trout", "trove", "truce", "truck", "truer", "truly",
+    "trump", "trunk", "truss", "trust", "truth", "tubas", "tubby", "tubed", "tubes", "tucks",
+    "tufts", "tulip", "tummy", "tumor", "tuned", "tuner", "tunes", "tungs", "turbo", "turns",
+    "turps", "tushy", "tusks", "tutee", "tutor", "tutus", "tuxes", "twang", "tweak", "tweed",
+    "tween", "tweet", "twerp", "twice", "twigs", "twill", "twine", "twins", "twiny", "twirl",
+    "twirp", "twist", "twits", "tying", "typed", "types", "typos", "usual", "usurp", "utter",
+    "udder", "ulcer", "ultra", "umber", "umped", "unarm", "unbox", "uncle", "uncut", "under",
+    "undid", "undue", "unfit", "unfix", "ungot", "unify", "union", "unite", "units", "unity",
+    "unmet", "unpin", "unset", "untie", "until", "unwed", "unwit", "unzip", "updos", "upend",
+    "uplit", "upped", "upper", "upset", "urban", "urged", "urges", "urine", "usage", "users",
+    "usher", "using", "voter", "votes", "vowed", "vowel", "vroom", "vulva", "vomit", "voted",
+    "vague", "vails", "vales", "valet", "valid", "valor", "value", "valve", "vamps", "vapid",
+    "vapor", "vases", "vault", "veeps", "veers", "vegan", "veils", "veins", "veiny", "venal",
+    "venge", "venom", "vents", "venue", "verbs", "verge", "verse", "verts", "verve", "vesta",
+    "vests", "vexed", "vexes", "vibes", "vicar", "viced", "vices", "video", "viers", "views",
+    "vigil", "vigor", "villa", "vined", "vines", "vinyl", "viola", "viper", "viral", "virid",
+    "virls", "visas", "visit", "visor", "vista", "vital", "vivid", "vixen", "vizor", "vocal",
+    "vodka", "vogue", "voice", "voids", "voila", "voles", "volta", "volts", "wryly", "wurst",
+    "wacko", "wacks", "wacky", "waded", "wades", "wafer", "wafts", "waged", "wager", "wages",
+    "wagon", "wahoo", "wails", "wains", "waist", "waked", "wakes", "walls", "waltz", "wands",
+    "waned", "wanes", "wants", "wards", "wares", "warms", "warns", "warts", "washy", "wasps",
+    "waste", "watch", "water", "watts", "waved", "waves", "wavey", "waxed", "waxen", "waxes",
+    "wazoo", "weans", "wears", "weary", "weave", "webby", "wedge", "wedgy", "weeds", "weeks",
+    "weens", "weeps", "weepy", "weigh", "weird", "welds", "wells", "welts", "wench", "wetly",
+    "whack", "whale", "wharf", "whats", "wheat", "wheel", "whens", "where", "which", "whiff",
+    "while", "whims", "whiny", "whips", "whirl", "whisk", "white", "whole", "whoop", "whose",
+    "wicks", "widen", "wider", "widow", "width", "wield", "wifed", "wills", "willy", "wilts",
+    "wimps", "wimpy", "wince", "winch", "winds", "windy", "wines", "wings", "winks", "winos",
+    "wiped", "wiper", "wipes", "wired", "wirer", "wires", "wised", "wiser", "wises", "wisps",
+    "wispy", "witch", "witty", "wives", "woful", "woken", "wolfs", "woman", "wombs", "women",
+    "wonky", "woods", "woody", "wooed", "wooer", "woofs", "wooly", "woops", "woosh", "woozy",
+    "words", "wordy", "works", "world", "worms", "worry", "worse", "worst", "worth", "worts",
+    "would", "wound", "woven", "wowed", "wraps", "wrath", "wreak", "wreck", "wrens", "wrist",
+    "write", "wrong", "wrote", "wrung", "yours", "youth", "yucky", "yummy", "yolky", "young",
+    "yacht", "yahoo", "yanks", "yappy", "yards", "yarns", "yawed", "yawns", "yearn", "years",
+    "yeast", "yells", "yelps", "yield", "yikes", "yodel", "yokes", "yolks", "zoned", "zones",
+    "zebra", "zeros", "zests", "zesty", "zilch", 
     
-    "IDEAL", "ICONS", "INDEX", "INFER", "INKED", "IVORY", "IRATE", "INSET", "IMAGE", "IMPLY",
-    "JOCKY", "JUICE", "JUMBO", "JOKER", "JOUST", "QUIET", "QUEST", "QUAIL", "QUILT", "QUICK",
-    "KNIFE", "UNFIT", "ULCER", "URINE", "USHER", "USING", "UNZIP", "UPSET", "ULTRA", "KIOSK",
-    "LACES", "LAUGH", "LEASH", "LEMON", "LIMBO", "LIVER", "LOSER", "LONGS", "LEGAL", "LAYER",
-    "LABOR", "LANKY", "LAYUP", "LIKEN", "LITER", "LUCID", "LUNGS", "LYING", "LURCH", "LIMBS",
-    "MAGIC", "MANGO", "MELON", "MOCHA", "MOVIE", "MULCH", "MUTED", "MINCE", "MARSH", "MANOR",
-    "MADLY", "MANLY", "MERCY", "MILKY", "MINOR", "MOGUL", "MONEY", "MOURN", "MUCUS", "MORON",
-    "NASTY", "NEWLY", "NOTES", "NUDGE", "NYLON", "NOTCH", "NOMAD", "NOBLE", "NAKED", "NACHO",
-    "NOISE", "NOVEL", "NAVEL", "NEIGH", "NOTED", "NUTTY", "NERDS", "NAMED", "NEWTS", "NINJA",
-    "OFTEN", "OCEAN", "ORBIT", "ORCAS", "OUGHT", "OWNED", "OVARY", "OUNCE", "ORATE", "ONSET",
-    "PERKY", "PESTO", "PHONE", "PILOT", "PIGMY", "PIXEL", "PLATE", "POLKA", "PATCH", "POURS",
-    "PARTY", "PAWNS", "PERIL", "PHONE", "PIGMY", "PILAF", "PINTO", "PLANT", "PLUMB", "POOCH",
-    "RADIO", "RANGE", "RAPID", "REPLY", "RESIN", "RHYME", "ROUTE", "RUGBY", "RIDGE", "RISKY",
-    "RABID", "RANKS", "RECAP", "REIGN", "REUSE", "RISEN", "ROUGE", "RURAL", "RIGOR", "RHINO",
-    "SHARP", "SHELF", "SHINE", "SLICE", "SOLID", "SPACE", "STAND", "STONE", "SCOLD", "SPOUT",
-    "SALAD", "SAUCY", "SCALD", "SCARF", "SCARE", "SCOPE", "SEIZE", "SHACK", "SHAFT", "SIXTY",
-    "TABLE", "TOWER", "THANK", "TINGE", "TOUGH", "TRACK", "TRULY", "TWICE", "TYPES", "TAXES",
-    "TAUNT", "TEETH", "TENOR", "THEIF", "THICK", "TIPSY", "TORSO", "TOWER", "TRIAL", "TURBO",
-    "VALUE", "VAULT", "VIGOR", "VOCAL", "VOICE", "VOWEL", "VIXEN", "VINYL", "VIDEO", "VENOM",
-    "WAIST", "WEDGE", "WHITE", "WHISK", "WOMEN", "WORLD", "WRONG", "WRECK", "WIMPY", "WIDTH",
-    "YAWNS", "YOUNG", "YACHT", "YEARN", "ZEBRA", "ZESTY", "EXACT", "ANGRY", "CHEAT", "REACT",
 ]
 
 const dirtyWords = [
@@ -448,6 +642,7 @@ function submitGuess() {
                 shareSquares("rightSpot");
                 
                 var square = document.getElementById(rowID);
+
                 var squareBackgroundColor = square.style.backgroundColor;
                 square.animate({
                     backgroundColor: [squareBackgroundColor, colorRightSpot]
@@ -460,16 +655,19 @@ function submitGuess() {
                 });
                 
                 var keyboardButton = document.getElementById(keyboardBtnID);
-                var keyboardButtonBackground = keyboardButton.style.backgroundColor;
-                keyboardButton.animate({
-                    backgroundColor: [keyboardButtonBackground, colorRightSpot],
-                }, {
-                    delay: delayCounter,            
-                    easing: "ease-in-out", 
-                    duration: 1000,      
-                    iterationCount: 1,    
-                    fill: "forwards",
-                });
+                keyboardButton.style.setProperty('--delayTime', delayCounter);
+                keyboardButton.classList.add("bgColorRS");
+
+                // var keyboardButtonBackground = keyboardButton.style.backgroundColor;
+                // keyboardButton.animate({
+                //     backgroundColor: [keyboardButtonBackground, colorRightSpot],
+                // }, {
+                //     delay: delayCounter,            
+                //     easing: "ease-in-out", 
+                //     duration: 1000,      
+                //     iterationCount: 1,    
+                //     fill: "forwards",
+                // });
 
 
                 if (correctCount == 5) {
@@ -494,16 +692,25 @@ function submitGuess() {
                         });
                     }
 
-                    // document.getElementById("gameOverMsg").innerHTML = "You WIN!";
-                    // document.getElementById("gameOver").style.display = "block";
-                    // document.getElementById("keyboard").style.display = "none";
+                    var linkString = "https://www.dictionary.com/browse/" + word;
+                    var word_link = document.createElement("a");
+                    word_link.href = linkString;
+                    word_link.target = '_blank';
+                    word_link.innerHTML = "See Definition For " + word;
+
+                    var par = document.getElementById("showWord");
+                    par.innerHTML = "";
+                    par.appendChild(word_link);
+
+                    var gameOverMsg = document.getElementById("gameOverMsg");
+                    gameOverMsg.innerHTML = "You WIN!";
+
                     $(document).ready(function()
                     {
                         setTimeout(function()
                         {
-                            //document.getElementById("gameOverMsg").innerHTML = "You WIN!";
                             document.getElementById("gameOverMsg").style.display = "block";
-                            document.getElementById("showWord").style.display = "none";
+                            document.getElementById("showWord").style.display = "block";
                             document.getElementById("gameOver").style.display = "block";
                             document.getElementById("keyboard").style.display = "none";
                         }, 
@@ -519,6 +726,7 @@ function submitGuess() {
                 shareSquares("rightLetter");
                 wordCheck = wordCheck.replace(letterSq, "_");
                 var square = document.getElementById(rowID);
+
                 var squareBackgroundColor = square.style.backgroundColor;
                 square.animate({
                     backgroundColor: [squareBackgroundColor, colorRightLetter]
@@ -529,17 +737,22 @@ function submitGuess() {
                     iterationCount: 1,    
                     fill: "forwards",
                 });
+
                 var keyboardButton = document.getElementById(keyboardBtnID);
-                var keyboardButtonBackground = keyboardButton.style.backgroundColor;
-                keyboardButton.animate({
-                    backgroundColor: [keyboardButtonBackground, colorRightLetter]
-                }, {
-                    delay: delayCounter,            
-                    easing: "ease-in-out", 
-                    duration: 1000,      
-                    iterationCount: 1,    
-                    fill: "forwards",
-                });
+                keyboardButton.style.setProperty('--delayTime', delayCounter);
+                keyboardButton.classList.add("bgColorRL");
+                keyboardButton.classList.remove("bgColorRS");
+
+                // var keyboardButtonBackground = keyboardButton.style.backgroundColor;
+                // keyboardButton.animate({
+                //     backgroundColor: [keyboardButtonBackground, colorRightLetter]
+                // }, {
+                //     delay: delayCounter,            
+                //     easing: "ease-in-out", 
+                //     duration: 1000,      
+                //     iterationCount: 1,    
+                //     fill: "forwards",
+                // });
             }
 
             // If the word does not contain the letter, then:
@@ -560,17 +773,21 @@ function submitGuess() {
                     iterationCount: 1, 
                     fill: "forwards",   
                 });
+                
                 var keyboardButton = document.getElementById(keyboardBtnID);
-                var letterColor = keyboardButton.style.color;
-                keyboardButton.animate({
-                    color: [letterColor, "rgb(163, 163, 163)"]
-                }, {
-                    delay: delayCounter,            
-                    easing: "ease-in-out", 
-                    duration: 1000,      
-                    iterationCount: 1,    
-                    fill: "forwards",
-                });
+                keyboardButton.style.setProperty('--delayTime', delayCounter);
+                keyboardButton.classList.add("keyboardLetterGrayedOut");
+
+                // var letterColor = keyboardButton.style.color;
+                // keyboardButton.animate({
+                //     color: [letterColor, "rgb(163, 163, 163)"]
+                // }, {
+                //     delay: delayCounter,            
+                //     easing: "ease-in-out", 
+                //     duration: 1000,      
+                //     iterationCount: 1,    
+                //     fill: "forwards",
+                // });
                 //keyboardButton.onclick = null;
                 //keyboardButton.style.pointerEvents = 'none';
             }
@@ -605,20 +822,21 @@ function submitGuess() {
             var word_link = document.createElement("a");
             word_link.href = linkString;
             word_link.target = '_blank';
-            word_link.innerHTML = word;
+            word_link.innerHTML = "See Definition For " + word;
 
 
             var par = document.getElementById("showWord");
-            par.innerHTML = "The word was: ";
+            par.innerHTML = "";
             par.appendChild(word_link);
+
+            document.getElementById("gameOverMsg").innerHTML = word;
 
             $(document).ready(function()
             {
                 setTimeout(function()
                 {
-                    document.getElementById("gameOverMsg").style.display = "none";
+                    document.getElementById("gameOverMsg").style.display = "block";
                     document.getElementById("showWord").style.display = "block";
-                    //document.getElementById("showWord").innerHTML = "The word was: " + word;
                     document.getElementById("gameOver").style.backgroundColor = "rgb(83, 83, 83)";
                     document.getElementById("gameOver").style.display = "block";
                     document.getElementById("keyboard").style.display = "none";
@@ -642,6 +860,7 @@ function nextLine() {
     letterRow++;
     document.getElementById("guessBtn").style.pointerEvents = 'none';
 }
+
 
 
 // ==========================================================================================================
@@ -719,7 +938,7 @@ function shareSquares(color) {
 }
 
 function printShareSquares() {
-    let fullShareText = 'Wurtle in ' + shareArray.length + "!\n";
+    let fullShareText = 'Wurtle in ' + shareArray.length + "!\n" + "www.wurtlegame.com\n";
     for (let ii = 0; ii < shareArray.length; ii++) {
         fullShareText += shareArray[ii] + '\n';
     }
@@ -756,14 +975,6 @@ function printShareSquares() {
         document.body.removeChild(textarea);
     }
 
-
-    // navigator.clipboard.writeText(fullShareText).then(function() {
-    //     alert(fullShareText + "(Copied!)");
-    // })
-    // .catch(err => {
-    //     console.error('Failed to read clipboard contents: ', err);
-    // });
-    //console.log(fullShareText);
 }
 
 
@@ -773,8 +984,7 @@ function printShareSquares() {
 
 // ==========================================================================================================
 
-
-
+var rootColors = document.querySelector(':root');
 let schemeCounter = 0;
 function showColorSchemes(clickCounter) {
 
@@ -833,6 +1043,10 @@ function colorSchemeSelector(selection) {
 function colorSchemeSetter(colorRS, colorRL, colorWinBorder, wordRS, wordRL) {
     colorRightSpot = colorRS;
     colorRightLetter = colorRL;
+
+    rootColors.style.setProperty('--colorRS', colorRS);
+    rootColors.style.setProperty('--colorRS', colorRS);
+    rootColors.style.setProperty('--colorRL', colorRL);
     var directionsRS = document.getElementsByClassName("directionsRightSpot");
     var directionsRL = document.getElementsByClassName("directionsRightLetter");
     wurtleTitle.animate({
@@ -882,6 +1096,7 @@ function colorSchemeTraditional() {
     rightSpotShareSquare = "🟩";
     rightLetterShareSquare = "🟨";
     colorSchemeSetter(colorRS, colorRL, colorWinBorder, wordRS, wordRL);
+    
 
 }
 
@@ -969,7 +1184,7 @@ function dirtyWurtle() {
 
 
 function resetGame() {
-    arrayIndex = Math.floor(Math.random() * 370);
+    arrayIndex = Math.floor(Math.random() * numberOfWordsInArray);
     codeWordCounter = 0;
     word = words[arrayIndex].toUpperCase();
     wordCheck = word;
@@ -981,28 +1196,9 @@ function resetGame() {
         let buttonPressedID = `btn${lettersPressed[ii]}`;
         let buttonPressed = document.getElementById(buttonPressedID);
 
-        
-        buttonPressed.animate({
-            color: ["white"],
-            backgroundColor: ["rgb(163, 163, 163)"],
-        }, {
-            delay: 0,            
-            easing: "ease-in-out", 
-            duration: 0,      
-            iterationCount: 1,    
-            fill: "forwards",
-        });
-
-        buttonPressed.classList.remove("keyBtn");
-        void buttonPressed.offsetWidth;
-        buttonPressed.classList.add("keyBtn");
-
-        // this is just some JQuery for testing
-        // $(".keyBtn").hover(function(){
-        //     $(this).css("background-color", "yellow");
-        //     }, function(){
-        //     $(this).css("background-color", "pink");
-        // });
+        buttonPressed.classList.remove("bgColorRS");
+        buttonPressed.classList.remove("bgColorRL");
+        buttonPressed.classList.remove("keyboardLetterGrayedOut")
         
     }
 
@@ -1093,16 +1289,5 @@ function resetGame() {
     codeWord = "";
     lettersPressed = [];
     wrongLetters = [];
-
     
-    
-}
-
-
-function keyboardHoverIn(x) {
-    x.style.backgroundColor = "rgb(88, 88, 88)";
-}
-
-function keyboardHoverOut(x) {
-    x.style.backgroundColor = "rgb(163, 163, 163)";
 }
