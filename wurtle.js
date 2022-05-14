@@ -1,19 +1,14 @@
-// ====================== VARIABLES ===========================
+// ======================GLOBAL VARIABLES ===========================
 let colorRightSpot = "green";
 let colorRightLetter = "rgb(190, 171, 0)";
 let colorWrong = "rgb(129, 129, 129)";
 let winSquareBorderColor = "rgb(30, 255, 0)";
 var wurtleTitle = document.getElementById("WURTLE");
-var numberOfWordsInArray = 4484;
+var numberOfWordsInArray = 4482;
 
 
 // RANDOM NUMBER GENERATOR
 var arrayIndex = Math.floor(Math.random() * numberOfWordsInArray);
-
-
-
-
-
 
 
 const words = [
@@ -228,13 +223,13 @@ const words = [
     "joeys", "johns", "joins", "joint", "joist", "joked", "joker", "jokes", "jolly", "jolts",
     "joule", "joust", "jowls", "joyed", "judge", "juice", "juicy", "juked", "jukes", "julep",
     "jumbo", "jumps", "knock", "knoll", "knots", "known", "knows", "knurl", "koala", "kooky",
-    "kabab", "kabob", "kafir", "kakis", "kales", "kaput", "karat", "karma", "kayak", "kazoo",
+    "kabob", "kafir", "kakis", "kales", "kaput", "karat", "karma", "kayak", "kazoo",
     "kebab", "kebob", "keels", "keeps", "kefir", "kelly", "kelps", "kempt", "keyed", "khaki",
     "kicks", "kiddo", "kiddy", "kills", "kilns", "kilos", "kilts", "kinds", "kings", "kinks",
     "kinky", "kiosk", "kissy", "kites", "kitty", "kiwis", "knack", "knaps", "knave", "knead",
     "kneed", "kneel", "knees", "knelt", "knife", "knits", "knobs", "lycee", "lying", "lyres",
     "label", "labor", "laced", "laces", "lacey", "lacks", "laded", "laden", "lader", "lades",
-    "ladle", "lairs", "laith", "laity", "lakes", "lamas", "lambs", "lamer", "lamps", "lance",
+    "ladle", "lairs", "laith", "laity", "lakes", "lambs", "lamer", "lamps", "lance",
     "lands", "lanes", "lanky", "lapel", "lapse", "larch", "lards", "large", "larks", "larva",
     "lased", "laser", "lases", "lasso", "lasts", "latch", "laten", "later", "latex", "lathe",
     "latte", "laugh", "lawed", "lawns", "laxer", "laxly", "layed", "layer", "layup", "lazed",
@@ -290,7 +285,7 @@ const words = [
     "nosey", "notch", "noted", "notes", "nouns", "novel", "nubby", "nudes", "nudge", "nuked",
     "nukes", "nulls", "numbs", "numen", "nurds", "nurls", "nurse", "oxlip", "oyers", "oxide",
     "oaken", "oared", "oases", "oasis", "oasts", "oaths", "obese", "obeys", "obits", "oboes",
-    "occur", "ocean", "octal", "octan", "octet", "octyl", "oculi", "odder", "oddly", "odors",
+    "occur", "ocean", "octal", "octan", "octet", "oculi", "odder", "oddly", "odors",
     "offed", "offer", "often", "ofter", "ogled", "ogler", "ogles", "ogres", "oiled", "oiler",
     "oinks", "olden", "older", "oldie", "olive", "ombre", "omega", "omens", "omits", "onery",
     "onion", "onset", "oohed", "oomph", "oozed", "oozes", "opals", "opens", "opera", "opine",
@@ -466,7 +461,6 @@ const words = [
     "yacht", "yahoo", "yanks", "yappy", "yards", "yarns", "yawed", "yawns", "yearn", "years",
     "yeast", "yells", "yelps", "yield", "yikes", "yodel", "yokes", "yolks", "zoned", "zones",
     "zebra", "zeros", "zests", "zesty", "zilch", 
-    
 ]
 
 const dirtyWords = [
@@ -481,11 +475,15 @@ const dirtyWords = [
 
 // ==========================================================================================================
 
+// KEYBOARD FUNCTION VARIABLES
+
 document.getElementById("guessBtn").style.pointerEvents = 'none';
 var letterRow = 1;
 var letterCol = 0;
 var lettersPressed = [];
 var wrongLetters = [];
+
+// ===============================================================
 
 function keyboard(letter) {
 
@@ -494,7 +492,7 @@ function keyboard(letter) {
 
     if (lettersPressed.includes(letter) == false && letter != 'xxx') lettersPressed.push(letter);
 
-    if (letter === 'xxx') {
+    if (letter === 'xxx') { // Delete button
         if(letterCol != 0)
         {
             letterCol--;
@@ -502,7 +500,6 @@ function keyboard(letter) {
             letterButton.animate({
                 transform: 'translateX(-.5em) scaleX(1.1)',
             }, {
-                //easing: "ease-out", 
                 duration: 100,      
                 iterationCount: 1,
             });
@@ -528,7 +525,6 @@ function keyboard(letter) {
             letterButton.animate({
                 transform: 'translateY(-.6em) scaleY(1.1) scaleX(1.1)',
             }, {
-                //easing: "ease-out", 
                 duration: 100,      
                 iterationCount: 1,
             });
@@ -574,49 +570,48 @@ function keyboard(letter) {
 
 // ==========================================================================================================
 
+// SUBMIT GUESS FUNCTION VARIABLES 
+
 var codeWordCounter = 0;
 var guesses = 0;
 var word = words[arrayIndex].toUpperCase();
 var wordCheck = word;
-let codeWord = "";
+let dirtyWurtleMode = false;
 console.log(word);
+
+// ==========================================
+
 function submitGuess() {
     var delayCounter = 0;
     var correctCount = 0;
     guesses++;
+
     // =========================================================
-    /* This section of code checks to see if the word is valid, 
-    but I can only check against my list of words. In order to 
-    get it working correctly, I would need a massive, inclusive
-    list of 5 letter words to check against */
+    /* This section of code checks to see if the word is valid, checking against the list of words in the array */
     
-    // let userWord = "";
-    // for (let col = 0; col < 5; col++) {
-    //     let rowID = `r${guesses}c${col}`;
-    //     userWord += document.getElementById(rowID).innerHTML;
-    // }
-
-    // let validWord = false;
-    // for (let ii = 0; ii < 220; ii++) {
-    //     if (userWord == words[ii]) validWord = true;
-    // }
-    // if (validWord == false) alert("Invalid Word");
-    // =========================================================
-
-    if (codeWordCounter == 0) {
-        
-        for (let col = 0; col < 5; col++) {
-            let rowID = `r${guesses}c${col}`;
-            codeWord += document.getElementById(rowID).innerHTML;
-        }
-        codeWordCounter++;
-        if (codeWord == "XXXXX") dirtyWurtle();
+    let userWord = "";
+    for (let col = 0; col < 5; col++) {
+        let rowID = `r${guesses}c${col}`;
+        userWord += document.getElementById(rowID).innerHTML;
     }
-    
-    
+
+    let validWord = false;
+    if (codeWordCounter == 0) {
+        codeWordCounter++;
+        if (userWord == "XXXXX") {
+            dirtyWurtleMode = true;
+            dirtyWurtle();
+        } 
+    }
+
+    if (dirtyWurtleMode) validWord = true;
+    else if (words.includes(userWord.toLowerCase())) validWord = true;
+    else alert("Word Not Found");
+    // =========================================================
 
 
-    if (guesses < 7) {
+
+    if (guesses < 7 && validWord == true) {
         // this for loop finds correct letters in correct spots, 
         // then replaces that letter in wordCheck with an underscore
         // in order to check against that in next for loop
@@ -845,6 +840,16 @@ function submitGuess() {
             });     
         }
     }
+    else {
+        for (let col = 0; col < 5; col++) {
+            let rowID = `r${guesses}c${col}`;
+            document.getElementById(rowID).innerHTML = "";
+
+        }
+        letterCol = 4;
+        letterRow--;
+        guesses--;
+    }
 }
 
 
@@ -869,9 +874,8 @@ function nextLine() {
 
 // ==========================================================================================================
 
-
-
 let directionCounter = 0;
+
 function showDirections(clickCounter) {
     directionCounter += clickCounter;
     let directions = document.getElementById("directions");
@@ -919,11 +923,16 @@ function hideDirections() {
 
 // ==========================================================================================================
 
+// SHARESQUARES FUNCTION VARIABLES
+
 var shareArray = [];
 var shareString = "";
 var shareCounter = 0;
 var rightSpotShareSquare = "🟩";
 var rightLetterShareSquare = "🟨";
+
+// ====================================
+
 function shareSquares(color) {
 
     if (color == "rightSpot") shareString += rightSpotShareSquare;
@@ -986,6 +995,8 @@ function printShareSquares() {
 
 var rootColors = document.querySelector(':root');
 let schemeCounter = 0;
+
+
 function showColorSchemes(clickCounter) {
 
     schemeCounter += clickCounter;
@@ -1158,14 +1169,25 @@ function dirtyWurtle() {
                     let rowID = `r1c${col}`;
                     document.getElementById(rowID).animate({
                         //backgroundColor: [squareBackgroundColor, "rgb(189, 0, 173)"],
-                        fontSize: "4rem",
+                        fontSize: "3.4rem",
                     }, {          
                         easing: "ease-in-out", 
                         duration: 1000,      
                         iterationCount: 1,    
                         fill: "forwards",
                     });
-                    if (col == 0 || col == 4) document.getElementById(rowID).innerHTML = "";   
+                    //if (col == 0 || col == 4) document.getElementById(rowID).innerHTML = ""; 
+                    if (col == 0 || col == 4) {
+                        document.getElementById(rowID).animate({
+                            color: "gray",
+                            fontSize: "3.4rem",
+                        }, {          
+                            easing: "ease-in-out", 
+                            duration: 1000,      
+                            iterationCount: 1,    
+                            fill: "forwards",
+                        });
+                    }
                 }
             }
             else { window.location.reload(); }
@@ -1286,8 +1308,17 @@ function resetGame() {
     shareCounter = 0;
     letterRow = 1;
     letterCol = 0;
-    codeWord = "";
     lettersPressed = [];
     wrongLetters = [];
-    
+
+    if (dirtyWurtleMode) {
+        $(document).ready(function()
+        {
+            setTimeout(function()
+            {
+                location.reload();
+            }, 
+            800);
+        }); 
+    }
 }
