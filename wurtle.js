@@ -4,7 +4,7 @@ let colorRightLetter = "rgb(190, 171, 0)";
 let colorWrong = "rgb(129, 129, 129)";
 let winSquareBorderColor = "rgb(30, 255, 0)";
 var wurtleTitle = document.getElementById("WURTLE");
-var numberOfWordsInArray = 4482;
+var numberOfWordsInArray = 4493;
 
 
 // RANDOM NUMBER GENERATOR
@@ -223,13 +223,13 @@ const words = [
     "joeys", "johns", "joins", "joint", "joist", "joked", "joker", "jokes", "jolly", "jolts",
     "joule", "joust", "jowls", "joyed", "judge", "juice", "juicy", "juked", "jukes", "julep",
     "jumbo", "jumps", "knock", "knoll", "knots", "known", "knows", "knurl", "koala", "kooky",
-    "kabob", "kafir", "kakis", "kales", "kaput", "karat", "karma", "kayak", "kazoo",
+    "kabob", "kafir", "kakis", "kales", "kaput", "karat", "karma", "kayak", "kazoo", "chows",
     "kebab", "kebob", "keels", "keeps", "kefir", "kelly", "kelps", "kempt", "keyed", "khaki",
     "kicks", "kiddo", "kiddy", "kills", "kilns", "kilos", "kilts", "kinds", "kings", "kinks",
     "kinky", "kiosk", "kissy", "kites", "kitty", "kiwis", "knack", "knaps", "knave", "knead",
     "kneed", "kneel", "knees", "knelt", "knife", "knits", "knobs", "lycee", "lying", "lyres",
     "label", "labor", "laced", "laces", "lacey", "lacks", "laded", "laden", "lader", "lades",
-    "ladle", "lairs", "laith", "laity", "lakes", "lambs", "lamer", "lamps", "lance",
+    "ladle", "lairs", "laith", "laity", "lakes", "lambs", "lamer", "lamps", "lance", "trade",
     "lands", "lanes", "lanky", "lapel", "lapse", "larch", "lards", "large", "larks", "larva",
     "lased", "laser", "lases", "lasso", "lasts", "latch", "laten", "later", "latex", "lathe",
     "latte", "laugh", "lawed", "lawns", "laxer", "laxly", "layed", "layer", "layup", "lazed",
@@ -285,7 +285,7 @@ const words = [
     "nosey", "notch", "noted", "notes", "nouns", "novel", "nubby", "nudes", "nudge", "nuked",
     "nukes", "nulls", "numbs", "numen", "nurds", "nurls", "nurse", "oxlip", "oyers", "oxide",
     "oaken", "oared", "oases", "oasis", "oasts", "oaths", "obese", "obeys", "obits", "oboes",
-    "occur", "ocean", "octal", "octan", "octet", "oculi", "odder", "oddly", "odors",
+    "occur", "ocean", "octal", "octan", "octet", "oculi", "odder", "oddly", "odors", "piles",
     "offed", "offer", "often", "ofter", "ogled", "ogler", "ogles", "ogres", "oiled", "oiler",
     "oinks", "olden", "older", "oldie", "olive", "ombre", "omega", "omens", "omits", "onery",
     "onion", "onset", "oohed", "oomph", "oozed", "oozes", "opals", "opens", "opera", "opine",
@@ -460,7 +460,8 @@ const words = [
     "write", "wrong", "wrote", "wrung", "yours", "youth", "yucky", "yummy", "yolky", "young",
     "yacht", "yahoo", "yanks", "yappy", "yards", "yarns", "yawed", "yawns", "yearn", "years",
     "yeast", "yells", "yelps", "yield", "yikes", "yodel", "yokes", "yolks", "zoned", "zones",
-    "zebra", "zeros", "zests", "zesty", "zilch", 
+    "zebra", "zeros", "zests", "zesty", "zilch", "slang", "laned", "chats", "chars", "stilt",
+    "trays", "taper", "paste", "whine",
 ]
 
 const dirtyWords = [
@@ -606,7 +607,7 @@ function submitGuess() {
 
     if (dirtyWurtleMode) validWord = true;
     else if (words.includes(userWord.toLowerCase())) validWord = true;
-    else alert("Word Not Found");
+    else alert("Word Not In List");
     // =========================================================
 
 
@@ -1104,6 +1105,7 @@ function colorSchemeTraditional() {
     let colorWinBorder = "rgb(30, 255, 0)";
     let wordRS = "green";
     let wordRL = "yellow";
+    document.getElementById("addAnN").innerHTML = " ";
     rightSpotShareSquare = "🟩";
     rightLetterShareSquare = "🟨";
     colorSchemeSetter(colorRS, colorRL, colorWinBorder, wordRS, wordRL);
@@ -1117,6 +1119,7 @@ function colorSchemeMiami() {
     let colorWinBorder = "rgb(189, 0, 173)";
     let wordRS = "blue";
     let wordRL = "pink";
+    document.getElementById("addAnN").innerHTML = " ";
     rightSpotShareSquare = "🟦";
     rightLetterShareSquare = "🟪";
     colorSchemeSetter(colorRS, colorRL, colorWinBorder, wordRS, wordRL);
@@ -1128,6 +1131,7 @@ function colorSchemeAutumn() {
     let colorWinBorder = "yellow";
     let wordRS = "orange";
     let wordRL = "yellow";
+    document.getElementById("addAnN").innerHTML = "n ";
     rightSpotShareSquare = "🟧";
     rightLetterShareSquare = "🟨";
     colorSchemeSetter(colorRS, colorRL, colorWinBorder, wordRS, wordRL);
@@ -1139,6 +1143,7 @@ function colorSchemeDirtle() {
     let colorWinBorder = "white";
     let wordRS = "pink";
     let wordRL = "brown";
+    document.getElementById("addAnN").innerHTML = " ";
     rightSpotShareSquare = "🟪";
     rightLetterShareSquare = "🟫";
     colorSchemeSetter(colorRS, colorRL, colorWinBorder, wordRS, wordRL);
