@@ -1034,15 +1034,16 @@ function shareSquares(color) {
 
 function printShareSquares() {
     document.getElementById("shareResults").style.display = "block";
+
     document.getElementById("copiedWord").style.opacity = "100%";
     //document.getElementById("wurtleWord").innerHTML = word;
     document.getElementById("shareWurtleNum").innerHTML = "Wurtle in " + shareArray.length + "!";
-    if (correctCount != 5) document.getElementById("shareWurtleNum").innerHTML = "This Wurtle Bested Me!";
+    if (correctCount < 5) document.getElementById("shareWurtleNum").innerHTML = "This Wurtle Bested Me!";
     document.getElementById("shareWurtleTime").innerHTML = "Time: " + shareTime;
     
-    let fullShareText = 'Wurtle in ' + shareArray.length + "!\n" + "Time: " + shareTime + "\n" + "www.wurtlegame.com\n";
+    let fullShareText = 'Wurtle in ' + shareArray.length + "!\n" + "Time: " + shareTime + "\n" + "wurtlegame.com\n";
     if (guesses == 6 && correctCount < 5) {
-        fullShareText = "This Wurtle bested me!" + "!\n" + "www.wurtlegame.com\n";
+        fullShareText = "This Wurtle bested me!" + "!\n" + "wurtlegame.com\n";
     }
     for (let ii = 0; ii < shareArray.length; ii++) {
         fullShareText += shareArray[ii] + '\n';
