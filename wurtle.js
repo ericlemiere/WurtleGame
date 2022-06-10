@@ -4,7 +4,7 @@ let colorRightLetter = "rgb(190, 171, 0)";
 let colorWrong = "rgb(129, 129, 129)";
 let winSquareBorderColor = "rgb(30, 255, 0)";
 var wurtleTitle = document.getElementById("WURTLE");
-var numberOfWordsInArray = 4493;
+var numberOfWordsInArray = 4492;
 
 
 // RANDOM NUMBER GENERATOR
@@ -290,7 +290,7 @@ const words = [
     "oinks", "olden", "older", "oldie", "olive", "ombre", "omega", "omens", "omits", "onery",
     "onion", "onset", "oohed", "oomph", "oozed", "oozes", "opals", "opens", "opera", "opine",
     "oping", "opium", "opted", "optic", "orals", "orate", "orbed", "orbit", "orcas", "orcin",
-    "order", "organ", "ortho", "orzos", "osmic", "ostia", "other", "otter", "ought", "ounce",
+    "order", "organ", "ortho", "orzos", "osmic", "whine", "other", "otter", "ought", "ounce",
     "ousts", "outdo", "outed", "outer", "outgo", "ovals", "ovary", "ovate", "ovens", "overs",
     "overt", "ovine", "ovule", "owing", "owlet", "owned", "owner", "oxbow", "oxeye", "pyres",
     "paced", "pacer", "paces", "packs", "pacts", "paddy", "padre", "pagan", "paged", "pager",
@@ -461,7 +461,7 @@ const words = [
     "yacht", "yahoo", "yanks", "yappy", "yards", "yarns", "yawed", "yawns", "yearn", "years",
     "yeast", "yells", "yelps", "yield", "yikes", "yodel", "yokes", "yolks", "zoned", "zones",
     "zebra", "zeros", "zests", "zesty", "zilch", "slang", "laned", "chats", "chars", "stilt",
-    "trays", "taper", "paste", "whine",
+    "trays", "taper", "paste", 
 ]
 
 const dirtyWords = [
@@ -579,12 +579,13 @@ var word = words[arrayIndex].toUpperCase();
 var wordCheck = word;
 let dirtyWurtleMode = false;
 console.log(word);
+var correctCount = 0;
 
 // ==========================================
 
 function submitGuess() {
     var delayCounter = 0;
-    var correctCount = 0;
+    
     guesses++;
 
     // =========================================================
@@ -607,7 +608,7 @@ function submitGuess() {
 
     if (dirtyWurtleMode) validWord = true;
     else if (words.includes(userWord.toLowerCase())) validWord = true;
-    else alert("Word Not In List");
+    else wordNotFound();
     // =========================================================
 
 
@@ -705,6 +706,7 @@ function submitGuess() {
                     {
                         setTimeout(function()
                         {
+                            document.getElementById("timer").style.opacity = "0";
                             document.getElementById("gameOverMsg").style.display = "block";
                             document.getElementById("showWord").style.display = "block";
                             document.getElementById("gameOver").style.display = "block";
@@ -712,6 +714,12 @@ function submitGuess() {
                         }, 
                         2000);
                     });   
+
+                    // setTimeout(function(){
+                    //     printShareSquares();
+                    //     document.getElementById("shareResults").style.display = "block";
+                    // }, 2400);
+
                 }
             }
 
@@ -831,6 +839,7 @@ function submitGuess() {
             {
                 setTimeout(function()
                 {
+                    document.getElementById("timer").style.opacity = "0";
                     document.getElementById("gameOverMsg").style.display = "block";
                     document.getElementById("showWord").style.display = "block";
                     document.getElementById("gameOver").style.backgroundColor = "rgb(83, 83, 83)";
@@ -838,7 +847,12 @@ function submitGuess() {
                     document.getElementById("keyboard").style.display = "none";
                 }, 
                 2000);
-            });     
+            });   
+            
+            // setTimeout(function(){
+            //     printShareSquares();
+            //     document.getElementById("shareResults").style.display = "block";
+            // }, 2400);
         }
     }
     else {
@@ -865,6 +879,50 @@ function nextLine() {
     letterCol = 0;
     letterRow++;
     document.getElementById("guessBtn").style.pointerEvents = 'none';
+}
+
+// ==========================================================================================================
+
+//                                                                                    Word Not Found Function
+
+// ==========================================================================================================
+
+
+function wordNotFound() { 
+    var wordNotFoundDiv = document.getElementById("wordNotFound");
+    wordNotFoundDiv.style.display = "block";
+    var wnfTop = 7.5;
+    if (guesses == 2) wnfTop = 16.5;
+    if (guesses == 3) wnfTop = 25.6;
+    if (guesses == 4) wnfTop = 34.8;
+    if (guesses == 5) wnfTop = 44;
+    if (guesses == 6) wnfTop = 53.1;
+    wordNotFoundDiv.style.top = wnfTop.toString() + "%";
+
+    // wordNotFoundDiv.classList.add("wordNotFoundAnimate");
+    // wordNotFoundDiv.classList.add("wordNotFoundFontColor");
+
+    wordNotFoundDiv.animate({
+        transform: 'rotateX(0deg)',
+    }, {            
+        easing: "ease-in-out", 
+        duration: 300,      
+        iterationCount: 1,    
+        fill: "forwards",
+    });
+
+    var displayTimer = setTimeout(function(){
+        wordNotFoundDiv.style.display = "none";
+        wordNotFoundDiv.animate({
+            transform: 'rotateX(90deg)',
+        }, {            
+            easing: "ease-in-out", 
+            duration: 300,      
+            iterationCount: 1,    
+            fill: "forwards",
+        });
+    }, 1200);
+
 }
 
 
@@ -920,6 +978,33 @@ function hideDirections() {
 
 // ==========================================================================================================
 
+//                                                                                                      Timer
+
+// ==========================================================================================================
+var shareTime = "";
+function timer(){
+    var sec = 0;
+    var minute = 0;
+    var timerDisplay = minute + ":0" + sec;
+    var timer = setInterval(function(){
+        document.getElementById('timer').innerHTML = timerDisplay;
+        if (correctCount == 5 || guesses == 6) clearInterval(timer);
+        shareTime = timerDisplay;
+        sec++;
+        if (sec < 10) timerDisplay = minute + ":0" + sec;
+        else timerDisplay = minute + ":" + sec;
+
+        if (sec == 59) {
+            minute++;
+            sec = -1;
+        }
+    }, 1000);
+}
+
+
+
+// ==========================================================================================================
+
 //                                                                                              Share Squares
 
 // ==========================================================================================================
@@ -948,10 +1033,22 @@ function shareSquares(color) {
 }
 
 function printShareSquares() {
-    let fullShareText = 'Wurtle in ' + shareArray.length + "!\n" + "www.wurtlegame.com\n";
+    document.getElementById("shareResults").style.display = "block";
+    document.getElementById("copiedWord").style.opacity = "100%";
+    //document.getElementById("wurtleWord").innerHTML = word;
+    document.getElementById("shareWurtleNum").innerHTML = "Wurtle in " + shareArray.length + "!";
+    if (correctCount != 5) document.getElementById("shareWurtleNum").innerHTML = "This Wurtle Bested Me!";
+    document.getElementById("shareWurtleTime").innerHTML = "Time: " + shareTime;
+    
+    let fullShareText = 'Wurtle in ' + shareArray.length + "!\n" + "Time: " + shareTime + "\n" + "www.wurtlegame.com\n";
+    if (guesses == 6 && correctCount < 5) {
+        fullShareText = "This Wurtle bested me!" + "!\n" + "www.wurtlegame.com\n";
+    }
     for (let ii = 0; ii < shareArray.length; ii++) {
         fullShareText += shareArray[ii] + '\n';
+        document.getElementById(`shareSquares${ii}`).innerHTML = shareArray[ii];
     }
+
 
     let textarea;
     let result;
@@ -977,15 +1074,23 @@ function printShareSquares() {
 
         textarea.setSelectionRange(0, textarea.value.length);
         result = document.execCommand('copy');
-        alert(fullShareText + "(Copied!)");
+
+        //alert(fullShareText + "(Copied!)");
     } catch (err) {
         console.error(err);
         result = null;
     } finally {
         document.body.removeChild(textarea);
     }
-
 }
+
+
+// function copyShareSquares() {
+//     document.getElementById("copiedWord").style.opacity = "100%";
+//     var showCopied = setTimeout(function(){
+//         document.getElementById("copiedWord").style.opacity = "0"; 
+//     }, 800);
+// }
 
 
 // ==========================================================================================================
@@ -1239,7 +1344,7 @@ function resetGame() {
             var clearSquares = document.getElementById(squaresRowID);
 
             clearSquares.animate({
-                backgroundColor: ["rgb(160, 160, 160)"],
+                backgroundColor: ["rgb(240, 240, 240)"],
                 color: ["rgba(0,0,0,0)"],
                 borderBottomColor: ["rgb(163, 163, 163)"],
                 borderTopColor: ["rgb(163, 163, 163)"],
@@ -1307,6 +1412,16 @@ function resetGame() {
     });  
 
 
+
+    document.getElementById("shareResults").style.display = "none";
+    for (let ii = 0; ii < 6; ii++) {
+        document.getElementById(`shareSquares${ii}`).innerHTML = "";
+    }
+
+    setTimeout(function()
+    {    
+        document.getElementById("timer").style.opacity = "100%";
+    }, 1000);
     guesses = 0;
     shareArray = [];
     shareString = "";
@@ -1315,6 +1430,8 @@ function resetGame() {
     letterCol = 0;
     lettersPressed = [];
     wrongLetters = [];
+    correctCount = 0;
+    timer();
 
     if (dirtyWurtleMode) {
         $(document).ready(function()
@@ -1327,3 +1444,4 @@ function resetGame() {
         }); 
     }
 }
+

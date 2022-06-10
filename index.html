@@ -16,15 +16,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">   
     <script src="https://kit.fontawesome.com/c2941ef83e.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body onload="timer()">
 
     <div class="app" id="app">
         <div class="main">
             <!-- <div style="position: relative; width: 0; height: 0"> -->
-            <div>    
-                <div class="qMark" id="qMark" onclick="showDirections(1)"><i class="fa-solid fa-circle-question"></i></div>
-                <h1 id="WURTLE">WURTLE</h1>
-                <div class="scheme" id="scheme" onclick="showColorSchemes(1)"><i id="schemeID" class="fa-solid fa-palette"></i></div>
+            <div class="headingRow">    
+                <div class="qMarkIcon" id="qMark" onclick="showDirections(1)"><i class="fa-solid fa-circle-question"></i></div>
+                <div class="wurtleTitle"><h1 id="WURTLE">WURTLE</h1></div>
+                <div class="schemeIcon" id="scheme" onclick="showColorSchemes(1)"><i id="schemeID" class="fa-solid fa-palette"></i></div>
             </div>
             
             
@@ -125,13 +125,33 @@
                 </div>
             </div>
 
-<!-- GAME OVER DIV -->
+
+            <div class="wordNotFound" id="wordNotFound"><h4>Word Not Found</h4></div>
+
+            <p id="timer">0:00</p>
+
+<!-- GAME OVER DIVs -->
+
+            <div class="shareResults" id="shareResults">
+                <h1 id="wurtleWord"></h1>
+                <p id="shareWurtleNum"></p>
+                <p id="shareWurtleTime"></p>
+                <p>www.wurtlegame.com</p>
+                <p id="shareSquares0"></p>
+                <p id="shareSquares1"></p>
+                <p id="shareSquares2"></p>
+                <p id="shareSquares3"></p>
+                <p id="shareSquares4"></p>
+                <p id="shareSquares5"></p>
+                <p id="copiedWord" style="opacity: 0;">Copied!</p>
+                <!-- <button class="Btn BtnNewGame" id="shareIcon" onclick="printShareSquares()"><i class="fa-solid fa-arrow-up-from-bracket"></i></button> -->
+            </div>
+
             <div class="gameOver" id="gameOver">
                 <br>
                 <h1 id="gameOverMsg"></h1>
                 <h2 id="showWord"></h2>
                 <button class="Btn BtnNewGame" onclick="resetGame();">Play Again</button>
-                <!-- <button class="Btn BtnNewGame" onclick="window.location.reload();">Play Again</button> -->
                 <button class="Btn BtnNewGame" id="shareIcon" onclick="printShareSquares()"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
             </div>
 
