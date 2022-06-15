@@ -4,7 +4,9 @@ let colorRightLetter = "rgb(190, 171, 0)";
 let colorWrong = "rgb(129, 129, 129)";
 let winSquareBorderColor = "rgb(30, 255, 0)";
 var wurtleTitle = document.getElementById("WURTLE");
-var numberOfWordsInArray = 4492;
+var numberOfWordsInArray = 4493;
+var shareTime = "";
+var timerVar;
 
 
 // RANDOM NUMBER GENERATOR
@@ -461,7 +463,7 @@ const words = [
     "yacht", "yahoo", "yanks", "yappy", "yards", "yarns", "yawed", "yawns", "yearn", "years",
     "yeast", "yells", "yelps", "yield", "yikes", "yodel", "yokes", "yolks", "zoned", "zones",
     "zebra", "zeros", "zests", "zesty", "zilch", "slang", "laned", "chats", "chars", "stilt",
-    "trays", "taper", "paste", 
+    "trays", "taper", "paste", "syrup",
 ]
 
 const dirtyWords = [
@@ -668,7 +670,7 @@ function submitGuess() {
 
 
                 if (correctCount == 5) {
-
+                    clearInterval(timerVar);
                     document.getElementById("gameOver").style.backgroundColor = colorRightSpot;
                     for (let winCol = 0; winCol < 5; winCol++) {
                         var winRowID = `r${guesses}c${winCol}`;
@@ -821,6 +823,7 @@ function submitGuess() {
         wordCheck = word;
 
         if (guesses == 6 && correctCount < 5) {
+            clearInterval(timerVar);
 
             var linkString = "https://www.dictionary.com/browse/" + word;
             var word_link = document.createElement("a");
@@ -981,14 +984,17 @@ function hideDirections() {
 //                                                                                                      Timer
 
 // ==========================================================================================================
-var shareTime = "";
+
+
 function timer(){
+    clearInterval(timerVar);
+    document.getElementById('timer').innerHTML = "0:00";
     var sec = 0;
     var minute = 0;
     var timerDisplay = minute + ":0" + sec;
-    var timer = setInterval(function(){
+
+    function timerCount() {
         document.getElementById('timer').innerHTML = timerDisplay;
-        if (correctCount == 5 || guesses == 6) clearInterval(timer);
         shareTime = timerDisplay;
         sec++;
         if (sec < 10) timerDisplay = minute + ":0" + sec;
@@ -998,7 +1004,8 @@ function timer(){
             minute++;
             sec = -1;
         }
-    }, 1000);
+    }
+    timerVar = setInterval(timerCount, 1000);
 }
 
 
@@ -1432,6 +1439,7 @@ function resetGame() {
     lettersPressed = [];
     wrongLetters = [];
     correctCount = 0;
+    clearInterval(timerVar);
     timer();
 
     if (dirtyWurtleMode) {
