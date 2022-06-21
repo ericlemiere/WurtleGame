@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">   
     <script src="https://kit.fontawesome.com/c2941ef83e.js" crossorigin="anonymous"></script>
 </head>
-<body onload="timer()">
+<body>
 
     <div class="app" id="app">
         <div class="main">
@@ -46,7 +46,7 @@
                     <p>A gray square means the word does not contain that letter.</p>
                     <p>A <span class="directionsColorWordRightLetter" id="directionsColorWordRightLetter" style="color: rgb(190, 171, 0);">yellow</span> square means the word contains that letter, but it is in the wrong position.</p>
                     <p>A<span id="addAnN"> </span><span class="directionsColorWordRightSpot" id="directionsColorWordRightSpot" style="color: green;">green</span> square means the letter is in the word and in the correct position.</p>
-                    
+                    <p>The timer starts when you press any letter!</p>
                     <button class="Btn closeDirections" onclick="showDirections(1)">Close</button>
                     </div>
                 </div>
@@ -128,23 +128,25 @@
 
             <div class="wordNotFound" id="wordNotFound"><h4>Word Not Found</h4></div>
 
-            <p id="timer"></p>
+            <p id="timer">0:00</p>
 
 <!-- GAME OVER DIVs -->
 
             <div class="shareResults" id="shareResults">
                 <h1 id="wurtleWord"></h1>
-                <p id="shareWurtleNum"></p>
-                <p id="shareWurtleTime"></p>
-                <p>wurtlegame.com</p>
-                <p id="shareSquares0"></p>
-                <p id="shareSquares1"></p>
-                <p id="shareSquares2"></p>
-                <p id="shareSquares3"></p>
-                <p id="shareSquares4"></p>
-                <p id="shareSquares5"></p>
-                <p id="copiedWord" style="opacity: 0;">Copied!</p>
-                <!-- <button class="Btn BtnNewGame" id="shareIcon" onclick="printShareSquares()"><i class="fa-solid fa-arrow-up-from-bracket"></i></button> -->
+                <div class="shareBorder" id="shareBorder">
+                    <p id="shareWurtleNum"></p>
+                    <p id="shareWurtleTime"></p>
+                    <p>wurtlegame.com</p>
+                    <p id="shareSquares0"></p>
+                    <p id="shareSquares1"></p>
+                    <p id="shareSquares2"></p>
+                    <p id="shareSquares3"></p>
+                    <p id="shareSquares4"></p>
+                    <p id="shareSquares5"></p>
+                </div>
+                <p class="copiedWord" id="copiedWord">Copied!</p>
+                <button class="Btn BtnNewGame" id="shareIcon" onclick="copyShareSquares(); printShareSquares();"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
             </div>
 
             <div class="gameOver" id="gameOver">
@@ -152,7 +154,7 @@
                 <h1 id="gameOverMsg"></h1>
                 <h2 id="showWord"></h2>
                 <button class="Btn BtnNewGame" onclick="resetGame();">Play Again</button>
-                <button class="Btn BtnNewGame" id="shareIcon" onclick="printShareSquares()"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+                <!-- <button class="Btn BtnNewGame" id="shareIcon" onclick="printShareSquares()"><i class="fa-solid fa-arrow-up-from-bracket"></i></button> -->
             </div>
 
 <!-- KEYBOARD -->

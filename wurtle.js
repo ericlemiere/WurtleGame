@@ -7,6 +7,7 @@ var wurtleTitle = document.getElementById("WURTLE");
 var numberOfWordsInArray = 4493;
 var shareTime = "";
 var timerVar;
+var timerStart = 0;
 
 
 // RANDOM NUMBER GENERATOR
@@ -490,6 +491,9 @@ var wrongLetters = [];
 
 function keyboard(letter) {
 
+    timerStart++;
+    if (timerStart == 1) timer();
+
     var letterString = `btn${letter}`;
     var letterButton = document.getElementById(letterString);
 
@@ -716,11 +720,12 @@ function submitGuess() {
                         }, 
                         2000);
                     });   
+                    
 
-                    // setTimeout(function(){
-                    //     printShareSquares();
-                    //     document.getElementById("shareResults").style.display = "block";
-                    // }, 2400);
+                    setTimeout(function(){
+                        printShareSquares();
+                        document.getElementById("shareResults").style.display = "block";
+                    }, 2600);
 
                 }
             }
@@ -824,7 +829,6 @@ function submitGuess() {
 
         if (guesses == 6 && correctCount < 5) {
             clearInterval(timerVar);
-
             var linkString = "https://www.dictionary.com/browse/" + word;
             var word_link = document.createElement("a");
             word_link.href = linkString;
@@ -836,7 +840,7 @@ function submitGuess() {
             par.innerHTML = "";
             par.appendChild(word_link);
 
-            document.getElementById("gameOverMsg").innerHTML = word;
+            document.getElementById("gameOverMsg").innerHTML = "No Wurtle!";
 
             $(document).ready(function()
             {
@@ -845,17 +849,17 @@ function submitGuess() {
                     document.getElementById("timer").style.opacity = "0";
                     document.getElementById("gameOverMsg").style.display = "block";
                     document.getElementById("showWord").style.display = "block";
-                    document.getElementById("gameOver").style.backgroundColor = "rgb(83, 83, 83)";
+                    document.getElementById("gameOver").style.backgroundColor = "rgb(54, 54, 54)";
                     document.getElementById("gameOver").style.display = "block";
                     document.getElementById("keyboard").style.display = "none";
                 }, 
                 2000);
             });   
             
-            // setTimeout(function(){
-            //     printShareSquares();
-            //     document.getElementById("shareResults").style.display = "block";
-            // }, 2400);
+            setTimeout(function(){
+                printShareSquares();
+                document.getElementById("shareResults").style.display = "block";
+            }, 2600);
         }
     }
     else {
@@ -901,9 +905,6 @@ function wordNotFound() {
     if (guesses == 5) wnfTop = 44;
     if (guesses == 6) wnfTop = 53.1;
     wordNotFoundDiv.style.top = wnfTop.toString() + "%";
-
-    // wordNotFoundDiv.classList.add("wordNotFoundAnimate");
-    // wordNotFoundDiv.classList.add("wordNotFoundFontColor");
 
     wordNotFoundDiv.animate({
         transform: 'rotateX(0deg)',
@@ -989,7 +990,7 @@ function hideDirections() {
 function timer(){
     clearInterval(timerVar);
     document.getElementById('timer').innerHTML = "0:00";
-    var sec = 0;
+    var sec = 1;
     var minute = 0;
     var timerDisplay = minute + ":0" + sec;
 
@@ -1040,12 +1041,12 @@ function shareSquares(color) {
 }
 
 function printShareSquares() {
-    document.getElementById("shareResults").style.display = "block";
+    document.getElementById("shareResults").style.opacity = "100%";
 
-    document.getElementById("copiedWord").style.opacity = "100%";
-    //document.getElementById("wurtleWord").innerHTML = word;
+    //document.getElementById("copiedWord").style.opacity = "100%";
+    document.getElementById("wurtleWord").innerHTML = word;
     document.getElementById("shareWurtleNum").innerHTML = "Wurtle in " + shareArray.length + "!";
-    if (correctCount < 5) document.getElementById("shareWurtleNum").innerHTML = "This Wurtle Bested Me!";
+    if (correctCount < 5) document.getElementById("shareWurtleNum").innerHTML = "No Wurtle!";
     document.getElementById("shareWurtleTime").innerHTML = "Time: " + shareTime;
     
     let fullShareText = 'Wurtle in ' + shareArray.length + "!\n" + "Time: " + shareTime + "\n" + "wurtlegame.com\n";
@@ -1093,12 +1094,17 @@ function printShareSquares() {
 }
 
 
-// function copyShareSquares() {
-//     document.getElementById("copiedWord").style.opacity = "100%";
-//     var showCopied = setTimeout(function(){
-//         document.getElementById("copiedWord").style.opacity = "0"; 
-//     }, 800);
-// }
+function copyShareSquares() {
+    var copiedWord = document.getElementById("copiedWord");
+    copiedWord.classList.add("copiedWordAnimate");
+    var shareBorder = document.getElementById("shareBorder");
+    shareBorder.classList.add("shareBorderAnimate");
+
+    var showCopied = setTimeout(function(){
+        copiedWord.classList.remove("copiedWordAnimate");
+        shareBorder.classList.remove("shareBorderAnimate");
+    }, 800);
+}
 
 
 // ==========================================================================================================
@@ -1421,7 +1427,7 @@ function resetGame() {
 
 
 
-    document.getElementById("shareResults").style.display = "none";
+    document.getElementById("shareResults").style.opacity = "0%";
     for (let ii = 0; ii < 6; ii++) {
         document.getElementById(`shareSquares${ii}`).innerHTML = "";
     }
@@ -1429,6 +1435,7 @@ function resetGame() {
     setTimeout(function()
     {    
         document.getElementById("timer").style.opacity = "100%";
+        document.getElementById("timer").innerHTML = "0:00";
     }, 1000);
     guesses = 0;
     shareArray = [];
@@ -1439,8 +1446,8 @@ function resetGame() {
     lettersPressed = [];
     wrongLetters = [];
     correctCount = 0;
+    timerStart = 0;
     clearInterval(timerVar);
-    timer();
 
     if (dirtyWurtleMode) {
         $(document).ready(function()
