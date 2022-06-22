@@ -3,15 +3,15 @@ let colorRightSpot = "green";
 let colorRightLetter = "rgb(190, 171, 0)";
 let colorWrong = "rgb(129, 129, 129)";
 let winSquareBorderColor = "rgb(30, 255, 0)";
-var wurtleTitle = document.getElementById("WURTLE");
-var numberOfWordsInArray = 4493;
-var shareTime = "";
-var timerVar;
-var timerStart = 0;
+let wurtleTitle = document.getElementById("WURTLE");
+let numberOfWordsInArray = 4495;
+let shareTime = "";
+let timerVar;
+let timerStart = 0;
 
 
 // RANDOM NUMBER GENERATOR
-var arrayIndex = Math.floor(Math.random() * numberOfWordsInArray);
+let arrayIndex = Math.floor(Math.random() * numberOfWordsInArray);
 
 
 const words = [
@@ -464,7 +464,7 @@ const words = [
     "yacht", "yahoo", "yanks", "yappy", "yards", "yarns", "yawed", "yawns", "yearn", "years",
     "yeast", "yells", "yelps", "yield", "yikes", "yodel", "yokes", "yolks", "zoned", "zones",
     "zebra", "zeros", "zests", "zesty", "zilch", "slang", "laned", "chats", "chars", "stilt",
-    "trays", "taper", "paste", "syrup",
+    "trays", "taper", "paste", "syrup", "shell", "store",
 ]
 
 const dirtyWords = [
@@ -482,10 +482,10 @@ const dirtyWords = [
 // KEYBOARD FUNCTION VARIABLES
 
 document.getElementById("guessBtn").style.pointerEvents = 'none';
-var letterRow = 1;
-var letterCol = 0;
-var lettersPressed = [];
-var wrongLetters = [];
+let letterRow = 1;
+let letterCol = 0;
+let lettersPressed = [];
+let wrongLetters = [];
 
 // ===============================================================
 
@@ -494,8 +494,8 @@ function keyboard(letter) {
     timerStart++;
     if (timerStart == 1) timer();
 
-    var letterString = `btn${letter}`;
-    var letterButton = document.getElementById(letterString);
+    let letterString = `btn${letter}`;
+    let letterButton = document.getElementById(letterString);
 
     if (lettersPressed.includes(letter) == false && letter != 'xxx') lettersPressed.push(letter);
 
@@ -512,7 +512,7 @@ function keyboard(letter) {
             });
 
             let rowID = `r${letterRow}c${letterCol}`;
-            var square = document.getElementById(rowID);
+            let square = document.getElementById(rowID);
             square.innerHTML = "";
             document.getElementById("guessBtn").style.pointerEvents = 'none';
 
@@ -537,7 +537,7 @@ function keyboard(letter) {
             });
 
             let rowID = `r${letterRow}c${letterCol}`;
-            var square = document.getElementById(rowID);
+            let square = document.getElementById(rowID);
             square.innerHTML = letter;
 
             square.animate({
@@ -579,18 +579,18 @@ function keyboard(letter) {
 
 // SUBMIT GUESS FUNCTION VARIABLES 
 
-var codeWordCounter = 0;
-var guesses = 0;
-var word = words[arrayIndex].toUpperCase();
-var wordCheck = word;
+let codeWordCounter = 0;
+let guesses = 0;
+let word = words[arrayIndex].toUpperCase();
+let wordCheck = word;
 let dirtyWurtleMode = false;
 console.log(word);
-var correctCount = 0;
+let correctCount = 0;
 
 // ==========================================
 
 function submitGuess() {
-    var delayCounter = 0;
+    let delayCounter = 0;
     
     guesses++;
 
@@ -644,9 +644,9 @@ function submitGuess() {
 
                 shareSquares("rightSpot");
                 
-                var square = document.getElementById(rowID);
+                let square = document.getElementById(rowID);
 
-                var squareBackgroundColor = square.style.backgroundColor;
+                let squareBackgroundColor = square.style.backgroundColor;
                 square.animate({
                     backgroundColor: [squareBackgroundColor, colorRightSpot]
                 }, {
@@ -657,11 +657,11 @@ function submitGuess() {
                     fill: "forwards",
                 });
                 
-                var keyboardButton = document.getElementById(keyboardBtnID);
+                let keyboardButton = document.getElementById(keyboardBtnID);
                 keyboardButton.style.setProperty('--delayTime', delayCounter);
                 keyboardButton.classList.add("bgColorRS");
 
-                // var keyboardButtonBackground = keyboardButton.style.backgroundColor;
+                // let keyboardButtonBackground = keyboardButton.style.backgroundColor;
                 // keyboardButton.animate({
                 //     backgroundColor: [keyboardButtonBackground, colorRightSpot],
                 // }, {
@@ -677,8 +677,8 @@ function submitGuess() {
                     clearInterval(timerVar);
                     document.getElementById("gameOver").style.backgroundColor = colorRightSpot;
                     for (let winCol = 0; winCol < 5; winCol++) {
-                        var winRowID = `r${guesses}c${winCol}`;
-                        var winSquare = document.getElementById(winRowID);
+                        let winRowID = `r${guesses}c${winCol}`;
+                        let winSquare = document.getElementById(winRowID);
                         winSquare.animate({
                             transform: ['translateY(0em)', 'translateY(-.6em)', 'translateY(0em)'],
                             borderBottomColor: [winSquareBorderColor, winSquareBorderColor, winSquareBorderColor],
@@ -695,17 +695,17 @@ function submitGuess() {
                         });
                     }
 
-                    var linkString = "https://www.dictionary.com/browse/" + word;
-                    var word_link = document.createElement("a");
+                    let linkString = "https://www.dictionary.com/browse/" + word;
+                    let word_link = document.createElement("a");
                     word_link.href = linkString;
                     word_link.target = '_blank';
                     word_link.innerHTML = "See Definition For " + word;
 
-                    var par = document.getElementById("showWord");
+                    let par = document.getElementById("showWord");
                     par.innerHTML = "";
                     par.appendChild(word_link);
 
-                    var gameOverMsg = document.getElementById("gameOverMsg");
+                    let gameOverMsg = document.getElementById("gameOverMsg");
                     gameOverMsg.innerHTML = "You WIN!";
 
                     $(document).ready(function()
@@ -736,9 +736,9 @@ function submitGuess() {
                 correctCount = 0;
                 shareSquares("rightLetter");
                 wordCheck = wordCheck.replace(letterSq, "_");
-                var square = document.getElementById(rowID);
+                let square = document.getElementById(rowID);
 
-                var squareBackgroundColor = square.style.backgroundColor;
+                let squareBackgroundColor = square.style.backgroundColor;
                 square.animate({
                     backgroundColor: [squareBackgroundColor, colorRightLetter]
                 }, {
@@ -749,12 +749,12 @@ function submitGuess() {
                     fill: "forwards",
                 });
 
-                var keyboardButton = document.getElementById(keyboardBtnID);
+                let keyboardButton = document.getElementById(keyboardBtnID);
                 keyboardButton.style.setProperty('--delayTime', delayCounter);
                 keyboardButton.classList.add("bgColorRL");
                 keyboardButton.classList.remove("bgColorRS");
 
-                // var keyboardButtonBackground = keyboardButton.style.backgroundColor;
+                // let keyboardButtonBackground = keyboardButton.style.backgroundColor;
                 // keyboardButton.animate({
                 //     backgroundColor: [keyboardButtonBackground, colorRightLetter]
                 // }, {
@@ -773,8 +773,8 @@ function submitGuess() {
                 correctCount = 0;
                 wrongLetters.push(letterSq);
                 shareSquares("gray");
-                var square = document.getElementById(rowID);
-                var squareBackgroundColor = square.style.backgroundColor;
+                let square = document.getElementById(rowID);
+                let squareBackgroundColor = square.style.backgroundColor;
                 square.animate({
                     backgroundColor: [squareBackgroundColor, colorWrong]
                 }, {
@@ -785,11 +785,11 @@ function submitGuess() {
                     fill: "forwards",   
                 });
                 
-                var keyboardButton = document.getElementById(keyboardBtnID);
+                let keyboardButton = document.getElementById(keyboardBtnID);
                 keyboardButton.style.setProperty('--delayTime', delayCounter);
                 keyboardButton.classList.add("keyboardLetterGrayedOut");
 
-                // var letterColor = keyboardButton.style.color;
+                // let letterColor = keyboardButton.style.color;
                 // keyboardButton.animate({
                 //     color: [letterColor, "rgb(163, 163, 163)"]
                 // }, {
@@ -810,8 +810,8 @@ function submitGuess() {
             else if (wordCheck.includes(letterSq) == false) {
                 correctCount = 0;
                 shareSquares("gray");
-                var square = document.getElementById(rowID);
-                var squareBackgroundColor = square.style.backgroundColor;
+                let square = document.getElementById(rowID);
+                let squareBackgroundColor = square.style.backgroundColor;
                 square.animate({
                     backgroundColor: [squareBackgroundColor, "rgb(129, 129, 129)"]
                 }, {
@@ -829,14 +829,14 @@ function submitGuess() {
 
         if (guesses == 6 && correctCount < 5) {
             clearInterval(timerVar);
-            var linkString = "https://www.dictionary.com/browse/" + word;
-            var word_link = document.createElement("a");
+            let linkString = "https://www.dictionary.com/browse/" + word;
+            let word_link = document.createElement("a");
             word_link.href = linkString;
             word_link.target = '_blank';
             word_link.innerHTML = "See Definition For " + word;
 
 
-            var par = document.getElementById("showWord");
+            let par = document.getElementById("showWord");
             par.innerHTML = "";
             par.appendChild(word_link);
 
@@ -896,9 +896,9 @@ function nextLine() {
 
 
 function wordNotFound() { 
-    var wordNotFoundDiv = document.getElementById("wordNotFound");
+    let wordNotFoundDiv = document.getElementById("wordNotFound");
     wordNotFoundDiv.style.display = "block";
-    var wnfTop = 7.5;
+    let wnfTop = 7.5;
     if (guesses == 2) wnfTop = 16.5;
     if (guesses == 3) wnfTop = 25.6;
     if (guesses == 4) wnfTop = 34.8;
@@ -915,7 +915,7 @@ function wordNotFound() {
         fill: "forwards",
     });
 
-    var displayTimer = setTimeout(function(){
+    let displayTimer = setTimeout(function(){
         wordNotFoundDiv.style.display = "none";
         wordNotFoundDiv.animate({
             transform: 'rotateX(90deg)',
@@ -990,9 +990,9 @@ function hideDirections() {
 function timer(){
     clearInterval(timerVar);
     document.getElementById('timer').innerHTML = "0:00";
-    var sec = 1;
-    var minute = 0;
-    var timerDisplay = minute + ":0" + sec;
+    let sec = 1;
+    let minute = 0;
+    let timerDisplay = minute + ":0" + sec;
 
     function timerCount() {
         document.getElementById('timer').innerHTML = timerDisplay;
@@ -1019,11 +1019,11 @@ function timer(){
 
 // SHARESQUARES FUNCTION VARIABLES
 
-var shareArray = [];
-var shareString = "";
-var shareCounter = 0;
-var rightSpotShareSquare = "🟩";
-var rightLetterShareSquare = "🟨";
+let shareArray = [];
+let shareString = "";
+let shareCounter = 0;
+let rightSpotShareSquare = "🟩";
+let rightLetterShareSquare = "🟨";
 
 // ====================================
 
@@ -1095,12 +1095,12 @@ function printShareSquares() {
 
 
 function copyShareSquares() {
-    var copiedWord = document.getElementById("copiedWord");
+    let copiedWord = document.getElementById("copiedWord");
     copiedWord.classList.add("copiedWordAnimate");
-    var shareBorder = document.getElementById("shareBorder");
+    let shareBorder = document.getElementById("shareBorder");
     shareBorder.classList.add("shareBorderAnimate");
 
-    var showCopied = setTimeout(function(){
+    let showCopied = setTimeout(function(){
         copiedWord.classList.remove("copiedWordAnimate");
         shareBorder.classList.remove("shareBorderAnimate");
     }, 800);
@@ -1113,7 +1113,7 @@ function copyShareSquares() {
 
 // ==========================================================================================================
 
-var rootColors = document.querySelector(':root');
+let rootColors = document.querySelector(':root');
 let schemeCounter = 0;
 
 
@@ -1178,8 +1178,8 @@ function colorSchemeSetter(colorRS, colorRL, colorWinBorder, wordRS, wordRL) {
     rootColors.style.setProperty('--colorRS', colorRS);
     rootColors.style.setProperty('--colorRS', colorRS);
     rootColors.style.setProperty('--colorRL', colorRL);
-    var directionsRS = document.getElementsByClassName("directionsRightSpot");
-    var directionsRL = document.getElementsByClassName("directionsRightLetter");
+    let directionsRS = document.getElementsByClassName("directionsRightSpot");
+    let directionsRL = document.getElementsByClassName("directionsRightLetter");
     wurtleTitle.animate({
         color: colorRightSpot
     }, {          
@@ -1188,7 +1188,7 @@ function colorSchemeSetter(colorRS, colorRL, colorWinBorder, wordRS, wordRL) {
         iterationCount: 1,    
         fill: "forwards",
     });
-    for(var i = 0; i < directionsRS.length; i++){
+    for(let i = 0; i < directionsRS.length; i++){
 
         // directionsRS[i].animate({
         //     backgroundColor: colorRightSpot
@@ -1278,14 +1278,14 @@ function colorSchemeDirtle() {
 
 
 function dirtyWurtle() {
-    var dirtyIndex = Math.floor(Math.random() * 30);
+    let dirtyIndex = Math.floor(Math.random() * 30);
     word = dirtyWords[dirtyIndex];
     wordCheck = word;
     $(document).ready(function()
     {
         setTimeout(function()
         {
-            var confirmDirtle = confirm("You have entered into dirty mode. You have 5 more tries to guess the dirty word. Welcome to DIRTLE.");
+            let confirmDirtle = confirm("You have entered into dirty mode. You have 5 more tries to guess the dirty word. Welcome to DIRTLE.");
             if (confirmDirtle) {
                 
                 colorSchemeDirtle();
@@ -1335,7 +1335,7 @@ function resetGame() {
     word = words[arrayIndex].toUpperCase();
     wordCheck = word;
     console.log(word);
-    var eraseTime = 0;
+    let eraseTime = 0;
 
     
     for (let ii = 0; ii < lettersPressed.length; ii++) {
@@ -1354,8 +1354,8 @@ function resetGame() {
     for (let row = 6; row > 0; row--)
     {
         for (let col = 4; col >= 0; col--) {
-            var squaresRowID = `r${row}c${col}`;
-            var clearSquares = document.getElementById(squaresRowID);
+            let squaresRowID = `r${row}c${col}`;
+            let clearSquares = document.getElementById(squaresRowID);
 
             clearSquares.animate({
                 backgroundColor: ["rgb(240, 240, 240)"],
