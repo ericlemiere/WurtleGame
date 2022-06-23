@@ -3,8 +3,8 @@ let colorRightSpot = "green";
 let colorRightLetter = "rgb(190, 171, 0)";
 let colorWrong = "rgb(129, 129, 129)";
 let winSquareBorderColor = "rgb(30, 255, 0)";
-let wurtleTitle = document.getElementById("WURTLE");
-let numberOfWordsInArray = 4495;
+const wurtleTitle = document.getElementById("WURTLE");
+const numberOfWordsInArray = 4495;
 let shareTime = "";
 let timerVar;
 let timerStart = 0;
@@ -467,11 +467,6 @@ const words = [
     "trays", "taper", "paste", "syrup", "shell", "store",
 ]
 
-const dirtyWords = [
-    "PENIS", "BOOBS", "DICKS", "COCKS", "BITCH", "TITTY", "BUTTS", "LABIA", "SEMEN", "SPERM",
-    "BLOWY", "CLITS", "QUEEF", "ASSES", "WANKS", "WANGS", "DONGS", "BONER", "RENOB", "PUSSY",
-    "GOOCH", "TAINT", "CHODE", "DILDO", "HUMPS", "KOOCH", "PRICK", "SKEET", "SLUTS", "WHORE",
-]
 
 // ==========================================================================================================
 
@@ -489,8 +484,7 @@ let wrongLetters = [];
 
 // ===============================================================
 
-function keyboard(letter) {
-
+const keyboard = (letter) => {
     timerStart++;
     if (timerStart == 1) timer();
 
@@ -579,11 +573,9 @@ function keyboard(letter) {
 
 // SUBMIT GUESS FUNCTION VARIABLES 
 
-let codeWordCounter = 0;
 let guesses = 0;
 let word = words[arrayIndex].toUpperCase();
 let wordCheck = word;
-let dirtyWurtleMode = false;
 console.log(word);
 let correctCount = 0;
 
@@ -604,17 +596,8 @@ function submitGuess() {
     }
 
     let validWord = false;
-    if (codeWordCounter == 0) {
-        codeWordCounter++;
-        if (userWord == "XXXXX") {
-            dirtyWurtleMode = true;
-            dirtyWurtle();
-        } 
-    }
+    const validWordCheck = (words.includes(userWord.toLowerCase())) ? validWord = true : wordNotFound();
 
-    if (dirtyWurtleMode) validWord = true;
-    else if (words.includes(userWord.toLowerCase())) validWord = true;
-    else wordNotFound();
     // =========================================================
 
 
@@ -1270,57 +1253,6 @@ function colorSchemeDirtle() {
 
 
 
-// ==========================================================================================================
-
-//                                                                                                     Dirtle
-
-// ==========================================================================================================
-
-
-function dirtyWurtle() {
-    let dirtyIndex = Math.floor(Math.random() * 30);
-    word = dirtyWords[dirtyIndex];
-    wordCheck = word;
-    $(document).ready(function()
-    {
-        setTimeout(function()
-        {
-            let confirmDirtle = confirm("You have entered into dirty mode. You have 5 more tries to guess the dirty word. Welcome to DIRTLE.");
-            if (confirmDirtle) {
-                
-                colorSchemeDirtle();
-                for (let col = 0; col < 5; col++) {
-                    let rowID = `r1c${col}`;
-                    document.getElementById(rowID).animate({
-                        //backgroundColor: [squareBackgroundColor, "rgb(189, 0, 173)"],
-                        fontSize: "3.4rem",
-                    }, {          
-                        easing: "ease-in-out", 
-                        duration: 1000,      
-                        iterationCount: 1,    
-                        fill: "forwards",
-                    });
-                    //if (col == 0 || col == 4) document.getElementById(rowID).innerHTML = ""; 
-                    if (col == 0 || col == 4) {
-                        document.getElementById(rowID).animate({
-                            color: "gray",
-                            fontSize: "3.4rem",
-                        }, {          
-                            easing: "ease-in-out", 
-                            duration: 1000,      
-                            iterationCount: 1,    
-                            fill: "forwards",
-                        });
-                    }
-                }
-            }
-            else { window.location.reload(); }
-        }, 
-        2000);
-    }); 
-}
-
-
 
 // ==========================================================================================================
 
@@ -1449,15 +1381,5 @@ function resetGame() {
     timerStart = 0;
     clearInterval(timerVar);
 
-    if (dirtyWurtleMode) {
-        $(document).ready(function()
-        {
-            setTimeout(function()
-            {
-                location.reload();
-            }, 
-            800);
-        }); 
-    }
 }
 
