@@ -916,34 +916,43 @@ function wordNotFound() {
 
 // ==========================================================================================================
 
-//                                                                              Show/Hide Directions Function
+//                                                                              Show/Hide Divs Function
 
 // ==========================================================================================================
 
 let directionCounter = 0;
-let directionsIcon = document.getElementById("qMark");
+let headingRow = document.getElementById("headingRow");
 
-function showDirections(clickCounter) {
+function showDiv(clickCounter, id, iconAnimate) {
     directionCounter += clickCounter;
-    let directions = document.getElementById("directions");
+    let directions = document.getElementById(id);
+    let iconToAnimate = document.getElementById(iconAnimate);
     if (directionCounter % 2 != 0) {
-        disableKeyboard();
-        whiteIcon(directionsIcon);
-        disableIcon(colorSchemeIcon);
-        directions.style.display = "block";
-        directions.animate({
-            opacity: 1,
-        }, {
-            easing: "ease-in", 
-            duration: 200,      
-            iterationCount: 1,
-            fill: "forwards",
-        });
+
+        if (guesses > 0 && id === 'colorScheme') {
+            alert("Changes to the color scheme can only be made before your first guess.");
+            hideDiv(id);
+        }
+        else {
+            disableKeyboard();
+            whiteIcon(iconToAnimate);
+            disableIcon(headingRow);
+            directions.style.display = "block";
+            directions.animate({
+                opacity: 1,
+            }, {
+                easing: "ease-in", 
+                duration: 200,      
+                iterationCount: 1,
+                fill: "forwards",
+            });
+        }
+        
     }
     else {
         enableKeyboard();
-        grayIcon(directionsIcon);
-        enableIcon(colorSchemeIcon);
+        grayIcon(iconToAnimate);
+        enableIcon(headingRow);
         directions.animate({
             opacity: 0,
         }, {
@@ -956,15 +965,15 @@ function showDirections(clickCounter) {
         {
             setTimeout(function()
             {
-                hideDirections(); 
+                hideDiv(id); 
             }, 
             200);
         }); 
     }
 }
 
-function hideDirections() {
-    document.getElementById("directions").style.display = "none";
+function hideDiv(id) {
+    document.getElementById(id).style.display = "none";
     directionCounter = 0;
 }
 
@@ -1140,61 +1149,6 @@ function copyShareSquares() {
 // ==========================================================================================================
 
 let rootColors = document.querySelector(':root');
-let schemeCounter = 0;
-let colorSchemeIcon = document.getElementById("scheme");
-
-
-function showColorSchemes(clickCounter) {
-
-    schemeCounter += clickCounter;
-    let colorScheme = document.getElementById("colorScheme");
-    if (schemeCounter % 2 != 0) {
-        colorScheme.style.display = "block";
-        disableKeyboard();
-        disableIcon(directionsIcon);
-        whiteIcon(colorSchemeIcon);
-        colorScheme.animate({
-            opacity: 1,
-        }, {
-            easing: "ease-in", 
-            duration: 200,      
-            iterationCount: 1,
-            fill: "forwards",
-        });
-
-        if (guesses > 0) {
-            alert("Changes to the color scheme can only be made before your first guess.");
-            hideColorSchemes();
-        }
-    }
-    else {
-        enableKeyboard();
-        grayIcon(colorSchemeIcon);
-        enableIcon(directionsIcon);
-        colorScheme.animate({
-            opacity: 0,
-        }, {
-            easing: "ease-in", 
-            duration: 200,      
-            iterationCount: 1,
-            fill: "forwards",
-        });
-        $(document).ready(function()
-        {
-            setTimeout(function()
-            {
-                hideColorSchemes(); 
-            }, 
-            200);
-        }); 
-    }
-}
-
-function hideColorSchemes() {
-    document.getElementById("colorScheme").style.display = "none";
-    schemeCounter = 0;
-}
-
 
 function colorSchemeSelector(selection) {
     if (selection == 1) colorSchemeTraditional();

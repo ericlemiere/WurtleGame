@@ -21,10 +21,10 @@
     <div class="app" id="app">
         <div class="main">
             <!-- <div style="position: relative; width: 0; height: 0"> -->
-            <div class="headingRow">    
-                <div class="qMarkIcon" id="qMark" onclick="showDirections(1)"><i class="fa-solid fa-circle-question"></i></div>
+            <div class="headingRow" id="headingRow">    
+                <div class="qMarkIcon" id="qMark" onclick="showDiv(1, 'directions', 'qMark')"><i class="fa-solid fa-circle-question"></i></div>
                 <div class="wurtleTitle"><h1 id="WURTLE">WURTLE</h1></div>
-                <div class="schemeIcon" id="scheme" onclick="showColorSchemes(1)"><i id="schemeID" class="fa-solid fa-palette"></i></div>
+                <div class="schemeIcon" id="scheme" onclick="showDiv(1, 'colorScheme', 'scheme')"><i id="schemeID" class="fa-solid fa-palette"></i></div>
             </div>
             
             
@@ -47,7 +47,7 @@
                     <p>A <span class="directionsColorWordRightLetter" id="directionsColorWordRightLetter" style="color: rgb(190, 171, 0);">yellow</span> square means the word contains that letter, but it is in the wrong position.</p>
                     <p>A<span id="addAnN"> </span><span class="directionsColorWordRightSpot" id="directionsColorWordRightSpot" style="color: green;">green</span> square means the letter is in the word and in the correct position.</p>
                     <p>The timer starts when you press any letter!</p>
-                    <button class="Btn closeDirections" onclick="showDirections(1)">Close</button>
+                    <button class="Btn closeDirections" onclick="showDiv(1, 'directions', 'qMark')">Close</button>
                     </div>
                 </div>
 
@@ -77,7 +77,7 @@
                         <p>Right letter, wrong position</p>
                     </div>
 
-                    <button class="Btn closeDirections" onclick="showColorSchemes(1)">Close</button>
+                    <button class="Btn closeDirections" onclick="showDiv(1, 'colorScheme', 'scheme')">Close</button>
                 </div>
 
 <!-- SQUARES -->

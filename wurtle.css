@@ -279,6 +279,7 @@ table { text-align: center;}
     font-style: italic;
     border-radius: 3px;
     box-shadow: 2px 2px 8px black;
+    cursor: pointer;
 }
 
 .Btn:hover {
