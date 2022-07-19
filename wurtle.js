@@ -921,14 +921,15 @@ function wordNotFound() {
 // ==========================================================================================================
 
 let directionCounter = 0;
+let directionsIcon = document.getElementById("qMark");
 
 function showDirections(clickCounter) {
     directionCounter += clickCounter;
     let directions = document.getElementById("directions");
-    let directionsIcon = document.getElementById("qMark");
     if (directionCounter % 2 != 0) {
         disableKeyboard();
         whiteIcon(directionsIcon);
+        disableIcon(colorSchemeIcon);
         directions.style.display = "block";
         directions.animate({
             opacity: 1,
@@ -942,6 +943,7 @@ function showDirections(clickCounter) {
     else {
         enableKeyboard();
         grayIcon(directionsIcon);
+        enableIcon(colorSchemeIcon);
         directions.animate({
             opacity: 0,
         }, {
@@ -994,14 +996,11 @@ const enableKeyboard = () => {
 
 
 // ======= Make icon white when clicked and gray when dismissed =========
-const whiteIcon = icon => {
-    icon.classList.remove('grayIcon');
-    icon.classList.add('whiteIcon');
-}
-const grayIcon = icon => {
-    icon.classList.remove('whiteIcon');
-    icon.classList.add('grayIcon');
-}
+const whiteIcon = icon => icon.classList.add('whiteIcon');
+const grayIcon = icon => icon.classList.remove('whiteIcon');
+
+const disableIcon = icon => icon.style.pointerEvents = "none";
+const enableIcon = icon => icon.style.pointerEvents = "auto";
 // ======================================================================
 
 
@@ -1142,16 +1141,17 @@ function copyShareSquares() {
 
 let rootColors = document.querySelector(':root');
 let schemeCounter = 0;
+let colorSchemeIcon = document.getElementById("scheme");
 
 
 function showColorSchemes(clickCounter) {
 
     schemeCounter += clickCounter;
     let colorScheme = document.getElementById("colorScheme");
-    let colorSchemeIcon = document.getElementById("scheme");
     if (schemeCounter % 2 != 0) {
         colorScheme.style.display = "block";
         disableKeyboard();
+        disableIcon(directionsIcon);
         whiteIcon(colorSchemeIcon);
         colorScheme.animate({
             opacity: 1,
@@ -1170,6 +1170,7 @@ function showColorSchemes(clickCounter) {
     else {
         enableKeyboard();
         grayIcon(colorSchemeIcon);
+        enableIcon(directionsIcon);
         colorScheme.animate({
             opacity: 0,
         }, {

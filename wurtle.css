@@ -86,20 +86,12 @@ h2 {
 }
 
 .whiteIcon {
-    animation: whiteIconAnimation 300ms forwards;
+    animation: whiteIconAnimation 800ms linear infinite;
 }
 
 @keyframes whiteIconAnimation {
     0% { color: rgb(124, 124, 124); }
-    100% { color: white; }
-}
-
-.grayIcon {
-    animation: grayIconAnimation 300ms forwards;
-}
-
-@keyframes grayIconAnimation {
-    0% { color: white; }
+    50% { color: white; }
     100% { color: rgb(124, 124, 124); }
 }
 
