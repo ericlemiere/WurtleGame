@@ -4,7 +4,7 @@ let colorRightLetter = "rgb(190, 171, 0)";
 let colorWrong = "rgb(129, 129, 129)";
 let winSquareBorderColor = "rgb(30, 255, 0)";
 const wurtleTitle = document.getElementById("WURTLE");
-const numberOfWordsInArray = 4495;
+const numberOfWordsInArray = 4497;
 let shareTime = "";
 let timerVar;
 let timerStart = 0;
@@ -464,7 +464,7 @@ const words = [
     "yacht", "yahoo", "yanks", "yappy", "yards", "yarns", "yawed", "yawns", "yearn", "years",
     "yeast", "yells", "yelps", "yield", "yikes", "yodel", "yokes", "yolks", "zoned", "zones",
     "zebra", "zeros", "zests", "zesty", "zilch", "slang", "laned", "chats", "chars", "stilt",
-    "trays", "taper", "paste", "syrup", "shell", "store",
+    "trays", "taper", "paste", "syrup", "shell", "store", "juror", "quote",
 ]
 
 
@@ -925,9 +925,11 @@ let directionCounter = 0;
 function showDirections(clickCounter) {
     directionCounter += clickCounter;
     let directions = document.getElementById("directions");
+    let directionsIcon = document.getElementById("qMark");
     if (directionCounter % 2 != 0) {
+        disableKeyboard();
+        whiteIcon(directionsIcon);
         directions.style.display = "block";
-
         directions.animate({
             opacity: 1,
         }, {
@@ -938,6 +940,8 @@ function showDirections(clickCounter) {
         });
     }
     else {
+        enableKeyboard();
+        grayIcon(directionsIcon);
         directions.animate({
             opacity: 0,
         }, {
@@ -961,6 +965,46 @@ function hideDirections() {
     document.getElementById("directions").style.display = "none";
     directionCounter = 0;
 }
+
+const disableKeyboard = () => {
+    let keyboardDirections = document.getElementById('keyboard');
+    keyboardDirections.style.pointerEvents = "none";
+    keyboardDirections.animate({
+        opacity: 0.2,
+    }, {
+        easing: "ease-in", 
+        duration: 200,      
+        iterationCount: 1,
+        fill: "forwards",
+    });
+}
+
+const enableKeyboard = () => {
+    let keyboardDirections = document.getElementById('keyboard');
+    keyboardDirections.style.pointerEvents = "auto";
+    keyboardDirections.animate({
+        opacity: 1,
+    }, {
+        easing: "ease-in", 
+        duration: 200,      
+        iterationCount: 1,
+        fill: "forwards",
+    });
+}
+
+
+// ======= Make icon white when clicked and gray when dismissed =========
+const whiteIcon = icon => {
+    icon.classList.remove('grayIcon');
+    icon.classList.add('whiteIcon');
+}
+const grayIcon = icon => {
+    icon.classList.remove('whiteIcon');
+    icon.classList.add('grayIcon');
+}
+// ======================================================================
+
+
 
 
 // ==========================================================================================================
@@ -1104,9 +1148,11 @@ function showColorSchemes(clickCounter) {
 
     schemeCounter += clickCounter;
     let colorScheme = document.getElementById("colorScheme");
+    let colorSchemeIcon = document.getElementById("scheme");
     if (schemeCounter % 2 != 0) {
         colorScheme.style.display = "block";
-
+        disableKeyboard();
+        whiteIcon(colorSchemeIcon);
         colorScheme.animate({
             opacity: 1,
         }, {
@@ -1122,6 +1168,8 @@ function showColorSchemes(clickCounter) {
         }
     }
     else {
+        enableKeyboard();
+        grayIcon(colorSchemeIcon);
         colorScheme.animate({
             opacity: 0,
         }, {
