@@ -4,10 +4,20 @@ let colorRightLetter = "rgb(190, 171, 0)";
 let colorWrong = "rgb(129, 129, 129)";
 let winSquareBorderColor = "rgb(30, 255, 0)";
 const wurtleTitle = document.getElementById("WURTLE");
-const numberOfWordsInArray = 4497;
+const numberOfWordsInArray = 4498;
 let shareTime = "";
 let timerVar;
+let countDown;
+let countdownTimerSelected = false;
 let timerStart = 0;
+let soundOn = false;
+
+let buttonClickAudio = new Audio('./audio/buttonClick.mp3');
+let buttonDeleteAudio = new Audio('./audio/buttonDelete.mp3');
+let gameWonAudio = new Audio('./audio/gameWon.mp3');
+let resetGameAudio = new Audio('./audio/resetGame.mp3');
+let clockAudio = new Audio('./audio/ticktock.mp3');
+let gameLostAudio = new Audio('./audio/gameLost.mp3');
 
 
 // RANDOM NUMBER GENERATOR
@@ -464,7 +474,7 @@ const words = [
     "yacht", "yahoo", "yanks", "yappy", "yards", "yarns", "yawed", "yawns", "yearn", "years",
     "yeast", "yells", "yelps", "yield", "yikes", "yodel", "yokes", "yolks", "zoned", "zones",
     "zebra", "zeros", "zests", "zesty", "zilch", "slang", "laned", "chats", "chars", "stilt",
-    "trays", "taper", "paste", "syrup", "shell", "store", "juror", "quote",
+    "trays", "taper", "paste", "syrup", "shell", "store", "juror", "quote", "slams",
 ]
 
 
@@ -484,7 +494,9 @@ let wrongLetters = [];
 
 // ===============================================================
 
+
 const keyboard = (letter) => {
+    disableGameLevelSelectors();
     timerStart++;
     if (timerStart == 1) timer();
 
@@ -494,6 +506,7 @@ const keyboard = (letter) => {
     if (lettersPressed.includes(letter) == false && letter != 'xxx') lettersPressed.push(letter);
 
     if (letter === 'xxx') { // Delete button
+        if (soundOn) buttonDeleteAudio.play();
         if(letterCol != 0)
         {
             letterCol--;
@@ -522,6 +535,7 @@ const keyboard = (letter) => {
     }
     else if (wrongLetters.includes(letter) == false) {
         if (letterCol < 5) {
+            if (soundOn) buttonClickAudio.play();
 
             letterButton.animate({
                 transform: 'translateY(-.6em) scaleY(1.1) scaleX(1.1)',
@@ -582,8 +596,9 @@ let correctCount = 0;
 // ==========================================
 
 function submitGuess() {
-    let delayCounter = 0;
     
+    
+    let delayCounter = 0;
     guesses++;
 
     // =========================================================
@@ -592,7 +607,7 @@ function submitGuess() {
     let userWord = "";
     for (let col = 0; col < 5; col++) {
         let rowID = `r${guesses}c${col}`;
-        userWord += document.getElementById(rowID).innerHTML;
+        userWord += document.getElementById(rowID).innerHTML;        
     }
 
     let validWord = false;
@@ -625,6 +640,12 @@ function submitGuess() {
             if (word[col] === letterSq) {
                 correctCount++;
 
+                if (soundOn) {
+                    setTimeout(() => {
+                        playAnimateSound(col);
+                    }, delayCounter + 100);
+                }
+
                 shareSquares("rightSpot");
                 
                 let square = document.getElementById(rowID);
@@ -644,21 +665,8 @@ function submitGuess() {
                 keyboardButton.style.setProperty('--delayTime', delayCounter);
                 keyboardButton.classList.add("bgColorRS");
 
-                // let keyboardButtonBackground = keyboardButton.style.backgroundColor;
-                // keyboardButton.animate({
-                //     backgroundColor: [keyboardButtonBackground, colorRightSpot],
-                // }, {
-                //     delay: delayCounter,            
-                //     easing: "ease-in-out", 
-                //     duration: 1000,      
-                //     iterationCount: 1,    
-                //     fill: "forwards",
-                // });
-
 
                 if (correctCount == 5) {
-                    clearInterval(timerVar);
-                    document.getElementById("gameOver").style.backgroundColor = colorRightSpot;
                     for (let winCol = 0; winCol < 5; winCol++) {
                         let winRowID = `r${guesses}c${winCol}`;
                         let winSquare = document.getElementById(winRowID);
@@ -678,37 +686,7 @@ function submitGuess() {
                         });
                     }
 
-                    let linkString = "https://www.dictionary.com/browse/" + word;
-                    let word_link = document.createElement("a");
-                    word_link.href = linkString;
-                    word_link.target = '_blank';
-                    word_link.innerHTML = "See Definition For " + word;
-
-                    let par = document.getElementById("showWord");
-                    par.innerHTML = "";
-                    par.appendChild(word_link);
-
-                    let gameOverMsg = document.getElementById("gameOverMsg");
-                    gameOverMsg.innerHTML = "You WIN!";
-
-                    $(document).ready(function()
-                    {
-                        setTimeout(function()
-                        {
-                            document.getElementById("timer").style.opacity = "0";
-                            document.getElementById("gameOverMsg").style.display = "block";
-                            document.getElementById("showWord").style.display = "block";
-                            document.getElementById("gameOver").style.display = "block";
-                            document.getElementById("keyboard").style.display = "none";
-                        }, 
-                        2000);
-                    });   
-                    
-
-                    setTimeout(function(){
-                        printShareSquares();
-                        document.getElementById("shareResults").style.display = "block";
-                    }, 2600);
+                    gameOver('won', 2000);
 
                 }
             }
@@ -717,6 +695,11 @@ function submitGuess() {
             // This allows for words with more than one of the same letter.
             else if (wordCheck.includes(letterSq)) {
                 correctCount = 0;
+                if (soundOn) {
+                    setTimeout(() => {
+                        playAnimateSound(col);
+                    }, delayCounter);
+                }
                 shareSquares("rightLetter");
                 wordCheck = wordCheck.replace(letterSq, "_");
                 let square = document.getElementById(rowID);
@@ -737,22 +720,17 @@ function submitGuess() {
                 keyboardButton.classList.add("bgColorRL");
                 keyboardButton.classList.remove("bgColorRS");
 
-                // let keyboardButtonBackground = keyboardButton.style.backgroundColor;
-                // keyboardButton.animate({
-                //     backgroundColor: [keyboardButtonBackground, colorRightLetter]
-                // }, {
-                //     delay: delayCounter,            
-                //     easing: "ease-in-out", 
-                //     duration: 1000,      
-                //     iterationCount: 1,    
-                //     fill: "forwards",
-                // });
             }
 
             // If the word does not contain the letter, then:
             // The square is gray and the keyboard button is disabled.
             // If the word DOES contain the letter, the next 'else if' is run.
             else if (word.includes(letterSq) == false) {
+                if (soundOn) {
+                    setTimeout(() => {
+                        playAnimateSound(col);
+                    }, delayCounter);
+                }
                 correctCount = 0;
                 wrongLetters.push(letterSq);
                 shareSquares("gray");
@@ -772,18 +750,6 @@ function submitGuess() {
                 keyboardButton.style.setProperty('--delayTime', delayCounter);
                 keyboardButton.classList.add("keyboardLetterGrayedOut");
 
-                // let letterColor = keyboardButton.style.color;
-                // keyboardButton.animate({
-                //     color: [letterColor, "rgb(163, 163, 163)"]
-                // }, {
-                //     delay: delayCounter,            
-                //     easing: "ease-in-out", 
-                //     duration: 1000,      
-                //     iterationCount: 1,    
-                //     fill: "forwards",
-                // });
-                //keyboardButton.onclick = null;
-                //keyboardButton.style.pointerEvents = 'none';
             }
 
             // If the word DOES contain the letter (and previous 'else if' is bypassed) BUT the wordCheck does NOT,
@@ -791,6 +757,11 @@ function submitGuess() {
             // This is because the word has more than one of the same letter.
             // This accounts for the user entering multiples of the same letter.
             else if (wordCheck.includes(letterSq) == false) {
+                if (soundOn) {
+                    setTimeout(() => {
+                        playAnimateSound(col);
+                    }, delayCounter);
+                }
                 correctCount = 0;
                 shareSquares("gray");
                 let square = document.getElementById(rowID);
@@ -811,38 +782,7 @@ function submitGuess() {
         wordCheck = word;
 
         if (guesses == 6 && correctCount < 5) {
-            clearInterval(timerVar);
-            let linkString = "https://www.dictionary.com/browse/" + word;
-            let word_link = document.createElement("a");
-            word_link.href = linkString;
-            word_link.target = '_blank';
-            word_link.innerHTML = "See Definition For " + word;
-
-
-            let par = document.getElementById("showWord");
-            par.innerHTML = "";
-            par.appendChild(word_link);
-
-            document.getElementById("gameOverMsg").innerHTML = "No Wurtle!";
-
-            $(document).ready(function()
-            {
-                setTimeout(function()
-                {
-                    document.getElementById("timer").style.opacity = "0";
-                    document.getElementById("gameOverMsg").style.display = "block";
-                    document.getElementById("showWord").style.display = "block";
-                    document.getElementById("gameOver").style.backgroundColor = "rgb(54, 54, 54)";
-                    document.getElementById("gameOver").style.display = "block";
-                    document.getElementById("keyboard").style.display = "none";
-                }, 
-                2000);
-            });   
-            
-            setTimeout(function(){
-                printShareSquares();
-                document.getElementById("shareResults").style.display = "block";
-            }, 2600);
+            gameOver('lost', 2000);
         }
     }
     else {
@@ -856,6 +796,57 @@ function submitGuess() {
         guesses--;
     }
 }
+
+// ==========================================================================================================
+
+//                                                                                         Game Over Function
+
+// ==========================================================================================================
+
+const gameOver = (wonOrLost, gameOverDelay) => {
+    clearInterval(timerVar);
+    clearInterval(countDown);
+    disableIcon(headingRow);
+    let gameOverMsg = document.getElementById("gameOverMsg");
+    let linkString = "https://www.dictionary.com/browse/" + word;
+    let word_link = document.createElement("a");
+    word_link.href = linkString;
+    word_link.target = '_blank';
+    word_link.innerHTML = "See Definition For " + word;
+    let par = document.getElementById("showWord");
+    par.innerHTML = "";
+    par.appendChild(word_link);
+
+    if (wonOrLost === 'won') {
+        document.getElementById("gameOver").style.backgroundColor = colorRightSpot;
+        gameOverMsg.innerHTML = "You WIN!";
+    }
+    if (wonOrLost === 'lost') {
+        document.getElementById("gameOver").style.backgroundColor = "rgb(54, 54, 54)";
+        gameOverMsg.innerHTML = "No Wurtle!";
+    }
+
+    $(document).ready(function()
+    {
+        setTimeout(function()
+        {
+            if (wonOrLost === 'won' && soundOn) gameWonAudio.play();
+            document.getElementById("timer").style.opacity = "0";
+            document.getElementById("gameOverMsg").style.display = "block";
+            document.getElementById("showWord").style.display = "block";
+            document.getElementById("gameOver").style.display = "block";
+            document.getElementById("keyboard").style.display = "none";
+        }, 
+        gameOverDelay);
+    });   
+    
+
+    setTimeout(function(){
+        printShareSquares();
+        document.getElementById("shareResults").style.display = "block";
+    }, (gameOverDelay + 600));
+}
+
 
 
 // ==========================================================================================================
@@ -924,6 +915,7 @@ let directionCounter = 0;
 let headingRow = document.getElementById("headingRow");
 
 function showDiv(clickCounter, id, iconAnimate) {
+    if (soundOn) buttonClickAudio.play();
     directionCounter += clickCounter;
     let directions = document.getElementById(id);
     let iconToAnimate = document.getElementById(iconAnimate);
@@ -1004,45 +996,143 @@ const enableKeyboard = () => {
 }
 
 
-// ======= Make icon white when clicked and gray when dismissed =========
+// ======= Make icon animate to pulsing white when clicked and gray when dismissed =========
 const whiteIcon = icon => icon.classList.add('whiteIcon');
 const grayIcon = icon => icon.classList.remove('whiteIcon');
 
 const disableIcon = icon => icon.style.pointerEvents = "none";
 const enableIcon = icon => icon.style.pointerEvents = "auto";
-// ======================================================================
-
+// =========================================================================================
 
 
 
 // ==========================================================================================================
 
-//                                                                                                      Timer
+//                                                                                                     SOUND
 
 // ==========================================================================================================
 
 
-function timer(){
-    clearInterval(timerVar);
-    document.getElementById('timer').innerHTML = "0:00";
-    let sec = 1;
-    let minute = 0;
-    let timerDisplay = minute + ":0" + sec;
+const toggleSound = onOrOff => {
 
-    function timerCount() {
-        document.getElementById('timer').innerHTML = timerDisplay;
-        shareTime = timerDisplay;
-        sec++;
-        if (sec < 10) timerDisplay = minute + ":0" + sec;
-        else timerDisplay = minute + ":" + sec;
-
-        if (sec == 59) {
-            minute++;
-            sec = -1;
-        }
+    soundOnIcon = document.getElementById('soundOn');
+    soundOffIcon = document.getElementById('soundOff');
+    if (onOrOff === 'on') {
+        soundOnIcon.classList.add('soundIconSelected');
+        soundOffIcon.classList.remove('soundIconSelected');
+        soundOn = true;
     }
-    timerVar = setInterval(timerCount, 1000);
+    if (onOrOff === 'off') {
+        soundOnIcon.classList.remove('soundIconSelected');
+        soundOffIcon.classList.add('soundIconSelected');
+        soundOn = false;
+    }
 }
+
+
+
+const playAnimateSound = (col) => {
+    let guessAudio = new Audio(`./audio/squareAudio${col+1}.mp3`);
+    guessAudio.play();
+}
+
+
+// ==========================================================================================================
+
+//                                                                                                     Timers
+
+// ==========================================================================================================
+
+let timerSeconds = 0;
+
+function timer() {
+    if (!countdownTimerSelected) {
+        clearInterval(timerVar);
+        
+        let sec = 1;
+        let minute = 0;
+        let timerDisplay = minute + ":0" + sec;
+
+        function timerCount() {
+            document.getElementById('timer').innerHTML = timerDisplay;
+            shareTime = timerDisplay;
+            sec++;
+            if (sec < 10) timerDisplay = minute + ":0" + sec;
+            else timerDisplay = minute + ":" + sec;
+
+            if (sec == 59) {
+                minute++;
+                sec = -1;
+            }
+        }
+        timerVar = setInterval(timerCount, 1000);
+    }
+    if (countdownTimerSelected) {
+        timerSeconds = gameLevelSeconds - 1;
+        clearInterval(countDown);
+        function timerCountdown() {
+            if (timerSeconds >= 0) {
+                document.getElementById('timer').innerHTML = timerSeconds;
+                timerSeconds--;
+
+                if (timerSeconds < 10) clockAudio.play();
+            }
+            else {
+                gameOver('lost', 0);
+                clearInterval(countDown);
+                gameLostAudio.play();
+            }
+        }
+
+        countDown = setInterval(timerCountdown, 1000);
+    }
+    
+}
+
+
+// ==========================================================================================================
+
+//                                                                                            Gameplay Levels
+
+// ==========================================================================================================
+
+let gameLevelSeconds = 60;
+let gameLevelMode = 'Free Play';
+
+const gameLevelSelector = (level) => {
+    if (soundOn) buttonClickAudio.play();
+    if (level != 0) {
+        gameLevelSeconds = level;
+        countdownTimerSelected = true;
+        document.getElementById('timer').innerHTML = level;
+        if (level == 60) {
+            gameLevelMode = 'Hard';
+            document.getElementById(`gameLevel60`).classList.add('gameLevelBtnSelected');
+            document.getElementById(`gameLevel30`).classList.remove('gameLevelBtnSelected');
+            document.getElementById(`gameLevel0`).classList.remove('gameLevelBtnSelected');
+        }
+        if (level == 30) {
+            gameLevelMode = 'Expert';
+            document.getElementById(`gameLevel30`).classList.add('gameLevelBtnSelected');
+            document.getElementById(`gameLevel60`).classList.remove('gameLevelBtnSelected');
+            document.getElementById(`gameLevel0`).classList.remove('gameLevelBtnSelected');
+        }
+        
+    }
+    else {
+        countdownTimerSelected = false;
+        gameLevelMode = 'Free Play';
+        document.getElementById('timer').innerHTML = "0:00";
+        document.getElementById(`gameLevel0`).classList.add('gameLevelBtnSelected');
+        document.getElementById(`gameLevel60`).classList.remove('gameLevelBtnSelected');
+        document.getElementById(`gameLevel30`).classList.remove('gameLevelBtnSelected');
+    }
+
+}
+
+const disableGameLevelSelectors = () => document.getElementById('gameLevelSelectors').style.pointerEvents = "none";
+const enableGameLevelSelectors = () => document.getElementById('gameLevelSelectors').style.pointerEvents = "auto";
+
 
 
 
@@ -1078,11 +1168,15 @@ function shareSquares(color) {
 function printShareSquares() {
     document.getElementById("shareResults").style.opacity = "100%";
 
-    //document.getElementById("copiedWord").style.opacity = "100%";
     document.getElementById("wurtleWord").innerHTML = word;
     document.getElementById("shareWurtleNum").innerHTML = "Wurtle in " + shareArray.length + "!";
     if (correctCount < 5) document.getElementById("shareWurtleNum").innerHTML = "No Wurtle!";
-    document.getElementById("shareWurtleTime").innerHTML = "Time: " + shareTime;
+
+    document.getElementById("shareWurtleLevel").innerHTML = "Level: " + gameLevelMode;
+    if (gameLevelMode === 'Hard' || gameLevelMode === 'Expert') {
+        document.getElementById("shareWurtleTime").innerHTML = "Time: " + (gameLevelSeconds - timerSeconds - 1) + " seconds";
+    }
+    else document.getElementById("shareWurtleTime").innerHTML = "Time: " + shareTime;
     
     let fullShareText = 'Wurtle in ' + shareArray.length + "!\n" + "Time: " + shareTime + "\n" + "wurtlegame.com\n";
     if (guesses == 6 && correctCount < 5) {
@@ -1130,12 +1224,14 @@ function printShareSquares() {
 
 
 function copyShareSquares() {
+    if (soundOn) buttonClickAudio.play();
+
     let copiedWord = document.getElementById("copiedWord");
     copiedWord.classList.add("copiedWordAnimate");
     let shareBorder = document.getElementById("shareBorder");
     shareBorder.classList.add("shareBorderAnimate");
 
-    let showCopied = setTimeout(function(){
+    setTimeout(function(){
         copiedWord.classList.remove("copiedWordAnimate");
         shareBorder.classList.remove("shareBorderAnimate");
     }, 800);
@@ -1151,6 +1247,7 @@ function copyShareSquares() {
 let rootColors = document.querySelector(':root');
 
 function colorSchemeSelector(selection) {
+    if (soundOn) buttonClickAudio.play();
     if (selection == 1) colorSchemeTraditional();
     else if (selection == 2) colorSchemeMiami();
     else if (selection == 3) colorSchemeAutumn();
@@ -1265,6 +1362,7 @@ function colorSchemeDirtle() {
 
 
 function resetGame() {
+    if (soundOn) resetGameAudio.play();
     arrayIndex = Math.floor(Math.random() * numberOfWordsInArray);
     codeWordCounter = 0;
     word = words[arrayIndex].toUpperCase();
@@ -1370,7 +1468,9 @@ function resetGame() {
     setTimeout(function()
     {    
         document.getElementById("timer").style.opacity = "100%";
-        document.getElementById("timer").innerHTML = "0:00";
+        if (gameLevelMode === 'Hard') document.getElementById("timer").innerHTML = "60";
+        if (gameLevelMode === 'Expert') document.getElementById("timer").innerHTML = "30";
+        if (gameLevelMode === 'Free Play') document.getElementById("timer").innerHTML = "0:00";
     }, 1000);
     guesses = 0;
     shareArray = [];
@@ -1383,6 +1483,8 @@ function resetGame() {
     correctCount = 0;
     timerStart = 0;
     clearInterval(timerVar);
-
+    clearInterval(countDown);
+    enableGameLevelSelectors();
+    enableIcon(headingRow);
 }
 

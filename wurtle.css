@@ -58,7 +58,14 @@ h2 {
     display: flex;
 }
 .wurtleTitle {
-    width: 60%;
+    width: 50%;
+    margin-left: .5rem;
+}
+
+.iconDiv {
+    width: 50%;
+    text-align: right;
+    margin-right: 1rem;
 }
 
 .qMarkIcon {
@@ -78,12 +85,14 @@ h2 {
     font-size: 1.8em;
     cursor: pointer;
     display: inline-block;
-    /* margin-left: 2rem; */
+    margin-left: .8rem;
     position: relative;
     top: .8rem;
     width: 20%;
     justify-content: right;
 }
+
+
 
 .whiteIcon {
     animation: whiteIconAnimation 800ms linear infinite;
@@ -107,15 +116,12 @@ h2 {
     position: absolute;
     top: 0;
     left: 0;
-    /* padding-left: 2em;
-    padding-right: 2em; */
     padding-top: 1em;
     padding-bottom: 2em;
     background-color: rgb(54, 54, 54);
     z-index: 10;
     display: none;
     overflow-wrap: break-word;
-    /* border-radius: 4px; */
     opacity: 0;
 }
 
@@ -136,6 +142,33 @@ h2 {
     /* background-color: var(--wrong); */
 }
 
+.soundIcons {
+    color:rgb(80, 80, 80);
+    border-color: rgb(80, 80, 80);
+    font-size: 2em;
+    cursor: pointer;
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    border-style: solid;
+    border-radius: 8px;
+    padding: 6px;
+    margin: 10px;
+}
+
+.soundIcon {
+    margin: auto;
+    justify-content: center;
+    vertical-align: middle;
+    position: relative;
+    top:10%;
+}
+
+.soundIconSelected {
+    color: white;
+    border-color: white;
+    background-color: var(--colorRS);
+}
 
 
 .squareGuess  {
@@ -289,6 +322,30 @@ table { text-align: center;}
     border-color: rgb(168, 168, 168);
 }
 
+.BtnNoHover {
+    background-color: rgb(92, 92, 92);
+    color:rgb(255, 255, 255);
+}
+
+.BtnNoHover:hover {
+    background-color: rgb(92, 92, 92);
+    color:rgb(255, 255, 255);
+}
+
+.gameLevelBtn {
+    width: 80%;
+    font-size: 1em;
+    color: black;
+    background-color: var(--wrong);
+    border: 1px solid var(--wrong);
+}
+
+.gameLevelBtnSelected {
+    background-color: white;
+    box-shadow: 0px 0px 10px var(--colorRS);
+    border-color: var(--colorRS);
+}
+
 .schemeBtn {
     font-size: .8rem;
     font-style: normal;
@@ -392,7 +449,7 @@ table { text-align: center;}
 
 .copiedWord {
     opacity: 0; 
-    padding-top: 4px;
+    font-size: .8em;
 }
 
 .copiedWordAnimate {

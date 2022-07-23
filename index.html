@@ -22,9 +22,16 @@
         <div class="main">
             <!-- <div style="position: relative; width: 0; height: 0"> -->
             <div class="headingRow" id="headingRow">    
-                <div class="qMarkIcon" id="qMark" onclick="showDiv(1, 'directions', 'qMark')"><i class="fa-solid fa-circle-question"></i></div>
-                <div class="wurtleTitle"><h1 id="WURTLE">WURTLE</h1></div>
-                <div class="schemeIcon" id="scheme" onclick="showDiv(1, 'colorScheme', 'scheme')"><i id="schemeID" class="fa-solid fa-palette"></i></div>
+                
+                <div class="wurtleTitle">
+                    <h1 id="WURTLE">WURTLE</h1>
+                </div>
+                <div class="iconDiv">
+                    <div class="schemeIcon" id="scheme" onclick="showDiv(1, 'colorScheme', 'scheme')"><i id="schemeID" class="fa-solid fa-palette"></i></div>
+                    <div class="schemeIcon" id="settingsGear" onclick="showDiv(1,'settings', 'settingsGear')"><i class="fa-solid fa-gear"></i></div>
+                    <div class="schemeIcon" id="qMark" onclick="showDiv(1, 'directions', 'qMark')"><i class="fa-solid fa-circle-question"></i></div>
+                </div>
+                
             </div>
             
             
@@ -78,6 +85,25 @@
                     </div>
 
                     <button class="Btn closeDirections" onclick="showDiv(1, 'colorScheme', 'scheme')">Close</button>
+                </div>
+
+<!-- SETTINGS DIV -->
+                <div class="directions" id="settings">
+                    <h2 id="" style="text-align: center;">Choose your level:</h2><br>
+                    <div id="gameLevelSelectors">
+                        <button class="Btn gameLevelBtn gameLevelBtnSelected" id="gameLevel0" onclick="gameLevelSelector(0)">Free Play: No time restrictions.</button>
+                        <button class="Btn gameLevelBtn" id="gameLevel60" onclick="gameLevelSelector(60)">Hard: 60 seconds</button>
+                        <button class="Btn gameLevelBtn" id="gameLevel30" onclick="gameLevelSelector(30)">Expert: 30 seconds</button>
+                    </div>
+                    
+
+                    <br>
+                    <div class="soundIcons soundIconSelected" id="soundOff" onclick="toggleSound('off')"><i class="fa-solid fa-volume-xmark soundIcon"></i></div>
+                    <div class="soundIcons" id="soundOn" onclick="toggleSound('on')"><i class="fa-solid fa-volume-high soundIcon"></i></div>
+                    <br>
+                    <button class="Btn closeDirections" onclick="showDiv(1, 'settings', 'settingsGear')">Close</button>
+
+                    
                 </div>
 
 <!-- SQUARES -->
@@ -136,6 +162,7 @@
                 <h1 id="wurtleWord"></h1>
                 <div class="shareBorder" id="shareBorder">
                     <p id="shareWurtleNum"></p>
+                    <p id="shareWurtleLevel"></p>
                     <p id="shareWurtleTime"></p>
                     <p>wurtlegame.com</p>
                     <p id="shareSquares0"></p>
@@ -146,7 +173,7 @@
                     <p id="shareSquares5"></p>
                 </div>
                 <p class="copiedWord" id="copiedWord">Copied!</p>
-                <button class="Btn BtnNewGame" id="shareIcon" onclick="copyShareSquares(); printShareSquares();"><i class="fa-solid fa-arrow-up-from-bracket"></i></button>
+                <button class="Btn BtnNewGame" id="shareIcon" onclick="copyShareSquares(); printShareSquares();"><i id="shareBtnIcon" class="fa-solid fa-arrow-up-from-bracket"></i></button>
             </div>
 
             <div class="gameOver" id="gameOver">
@@ -154,11 +181,10 @@
                 <h1 id="gameOverMsg"></h1>
                 <h2 id="showWord"></h2>
                 <button class="Btn BtnNewGame" onclick="resetGame();">Play Again</button>
-                <!-- <button class="Btn BtnNewGame" id="shareIcon" onclick="printShareSquares()"><i class="fa-solid fa-arrow-up-from-bracket"></i></button> -->
             </div>
 
 <!-- KEYBOARD -->
-            <div class="keyboard" id="keyboard">
+            <div class="keyboard" id="keyboard" onclick="">
                 <table class="keyboardTable">
                     <tr>
                         <td class="keyBtn" id="btnQ" onclick="keyboard('Q')">Q</td>
