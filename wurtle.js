@@ -13,11 +13,19 @@ let timerStart = 0;
 let soundOn = false;
 
 let buttonClickAudio = new Audio('./audio/buttonClick.mp3');
+buttonClickAudio.preload = 'auto';
 let buttonDeleteAudio = new Audio('./audio/buttonDelete.mp3');
+buttonDeleteAudio.preload = 'auto';
 let gameWonAudio = new Audio('./audio/gameWon.mp3');
+gameWonAudio.preload = 'auto';
 let resetGameAudio = new Audio('./audio/resetGame.mp3');
+resetGameAudio.preload = 'auto';
 let clockAudio = new Audio('./audio/ticktock.mp3');
+clockAudio.preload = 'auto';
 let gameLostAudio = new Audio('./audio/gameLost.mp3');
+gameLostAudio.preload = 'auto';
+let squareAudio = new Audio(`./audio/squareAudio5.mp3`);
+squareAudio.preload = 'auto';
 
 
 // RANDOM NUMBER GENERATOR
@@ -642,8 +650,8 @@ function submitGuess() {
 
                 if (soundOn) {
                     setTimeout(() => {
-                        playAnimateSound(col);
-                    }, delayCounter + 100);
+                        squareAudio.play();
+                    }, delayCounter);
                 }
 
                 shareSquares("rightSpot");
@@ -697,7 +705,7 @@ function submitGuess() {
                 correctCount = 0;
                 if (soundOn) {
                     setTimeout(() => {
-                        playAnimateSound(col);
+                        squareAudio.play();
                     }, delayCounter);
                 }
                 shareSquares("rightLetter");
@@ -728,7 +736,7 @@ function submitGuess() {
             else if (word.includes(letterSq) == false) {
                 if (soundOn) {
                     setTimeout(() => {
-                        playAnimateSound(col);
+                        squareAudio.play();
                     }, delayCounter);
                 }
                 correctCount = 0;
@@ -759,7 +767,7 @@ function submitGuess() {
             else if (wordCheck.includes(letterSq) == false) {
                 if (soundOn) {
                     setTimeout(() => {
-                        playAnimateSound(col);
+                        squareAudio.play();
                     }, delayCounter);
                 }
                 correctCount = 0;
@@ -820,10 +828,12 @@ const gameOver = (wonOrLost, gameOverDelay) => {
     if (wonOrLost === 'won') {
         document.getElementById("gameOver").style.backgroundColor = colorRightSpot;
         gameOverMsg.innerHTML = "You WIN!";
+        firstShareLine = "Wurtle in ";
     }
     if (wonOrLost === 'lost') {
         document.getElementById("gameOver").style.backgroundColor = "rgb(54, 54, 54)";
         gameOverMsg.innerHTML = "No Wurtle!";
+        firstShareLine = "No Wurtle!";
     }
 
     $(document).ready(function()
@@ -1031,9 +1041,8 @@ const toggleSound = onOrOff => {
 
 
 
-const playAnimateSound = (col) => {
-    let guessAudio = new Audio(`./audio/squareAudio${col+1}.mp3`);
-    guessAudio.play();
+const playAnimateSound = () => {
+    
 }
 
 
@@ -1075,12 +1084,12 @@ function timer() {
                 document.getElementById('timer').innerHTML = timerSeconds;
                 timerSeconds--;
 
-                if (timerSeconds < 10) clockAudio.play();
+                if (timerSeconds < 10 && soundOn) clockAudio.play();
             }
             else {
                 gameOver('lost', 0);
                 clearInterval(countDown);
-                gameLostAudio.play();
+                if (soundOn) gameLostAudio.play();
             }
         }
 
@@ -1165,29 +1174,39 @@ function shareSquares(color) {
     }    
 }
 
+let firstShareLine = '';
+let fullShareText = '';
+
 function printShareSquares() {
     document.getElementById("shareResults").style.opacity = "100%";
-
     document.getElementById("wurtleWord").innerHTML = word;
-    document.getElementById("shareWurtleNum").innerHTML = "Wurtle in " + shareArray.length + "!";
+    document.getElementById("shareWurtleNum").innerHTML = firstShareLine + shareArray.length + "!";
     if (correctCount < 5) document.getElementById("shareWurtleNum").innerHTML = "No Wurtle!";
 
-    document.getElementById("shareWurtleLevel").innerHTML = "Level: " + gameLevelMode;
+    document.getElementById("shareWurtleLevel").innerHTML = "Mode: " + gameLevelMode;
     if (gameLevelMode === 'Hard' || gameLevelMode === 'Expert') {
         document.getElementById("shareWurtleTime").innerHTML = "Time: " + (gameLevelSeconds - timerSeconds - 1) + " seconds";
+
+        if (firstShareLine == 'No Wurtle!') fullShareText = firstShareLine + "\n" + "Mode: " + gameLevelMode + "\n" + "Time: " + (gameLevelSeconds - timerSeconds - 1) + " seconds" + "\n" + "wurtlegame.com\n";
+        else fullShareText = firstShareLine + shareArray.length + "!\n" + "Mode: " + gameLevelMode + "\n" + "Time: " + (gameLevelSeconds - timerSeconds - 1) + " seconds" + "\n" + "wurtlegame.com\n";
+        
+        for (let ii = 0; ii < shareArray.length; ii++) {
+            fullShareText += shareArray[ii] + '\n';
+            document.getElementById(`shareSquares${ii}`).innerHTML = shareArray[ii];
+        }
+
     }
-    else document.getElementById("shareWurtleTime").innerHTML = "Time: " + shareTime;
+    else {
+        document.getElementById("shareWurtleTime").innerHTML = "Time: " + shareTime;
+        if (guesses == 6 && correctCount < 5) fullShareText = "No Wurtle!" + "\n" + "Mode: " + gameLevelMode + "\n" + "Time: " + shareTime + "\n" + "wurtlegame.com\n";
+        else fullShareText = firstShareLine + shareArray.length + "!\n" + "Mode: " + gameLevelMode + "\n" + "Time: " + shareTime + "\n" + "wurtlegame.com\n";
+        
+        for (let ii = 0; ii < shareArray.length; ii++) {
+            fullShareText += shareArray[ii] + '\n';
+            document.getElementById(`shareSquares${ii}`).innerHTML = shareArray[ii];
+        }
+    }
     
-    let fullShareText = 'Wurtle in ' + shareArray.length + "!\n" + "Time: " + shareTime + "\n" + "wurtlegame.com\n";
-    if (guesses == 6 && correctCount < 5) {
-        fullShareText = "This Wurtle bested me!" + "!\n" + "wurtlegame.com\n";
-    }
-    for (let ii = 0; ii < shareArray.length; ii++) {
-        fullShareText += shareArray[ii] + '\n';
-        document.getElementById(`shareSquares${ii}`).innerHTML = shareArray[ii];
-    }
-
-
     let textarea;
     let result;
 

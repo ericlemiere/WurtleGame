@@ -56,16 +56,20 @@ h2 {
 
 .headingRow {
     display: flex;
+    width: fit-content;
+    text-align: center;
 }
+
 .wurtleTitle {
     width: 50%;
-    margin-left: .5rem;
+    margin-left: 1rem;
 }
 
 .iconDiv {
     width: 50%;
     text-align: right;
     margin-right: 1rem;
+    margin-left: 2rem;
 }
 
 .qMarkIcon {
@@ -85,7 +89,7 @@ h2 {
     font-size: 1.8em;
     cursor: pointer;
     display: inline-block;
-    margin-left: .8rem;
+    margin-left: 1rem;
     position: relative;
     top: .8rem;
     width: 20%;
