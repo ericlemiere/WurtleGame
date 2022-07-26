@@ -882,15 +882,16 @@ function nextLine() {
 function wordNotFound() { 
     let wordNotFoundDiv = document.getElementById("wordNotFound");
     wordNotFoundDiv.style.display = "block";
-    let wnfTop = 7.5;
-    if (guesses == 2) wnfTop = 16.5;
-    if (guesses == 3) wnfTop = 25.6;
-    if (guesses == 4) wnfTop = 34.8;
-    if (guesses == 5) wnfTop = 44;
-    if (guesses == 6) wnfTop = 53.1;
+    let wordNotFoundh4 = document.getElementById('wordNotFoundh4');
+    let wnfTop = 0;
+    if (guesses == 2) wnfTop = 16;
+    if (guesses == 3) wnfTop = 32;
+    if (guesses == 4) wnfTop = 48;
+    if (guesses == 5) wnfTop = 65;
+    if (guesses == 6) wnfTop = 81;
     wordNotFoundDiv.style.top = wnfTop.toString() + "%";
 
-    wordNotFoundDiv.animate({
+    wordNotFoundh4.animate({
         transform: 'rotateX(0deg)',
     }, {            
         easing: "ease-in-out", 
@@ -901,7 +902,7 @@ function wordNotFound() {
 
     let displayTimer = setTimeout(function(){
         wordNotFoundDiv.style.display = "none";
-        wordNotFoundDiv.animate({
+        wordNotFoundh4.animate({
             transform: 'rotateX(90deg)',
         }, {            
             easing: "ease-in-out", 
