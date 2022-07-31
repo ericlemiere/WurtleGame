@@ -600,14 +600,13 @@ let word = words[arrayIndex].toUpperCase();
 let wordCheck = word;
 console.log(word);
 let correctCount = 0;
+let delayCounter;
 
 // ==========================================
 
 function submitGuess() {
-    
-    
-    let delayCounter = 0;
     guesses++;
+    delayCounter = 0;
 
     // =========================================================
     /* This section of code checks to see if the word is valid, checking against the list of words in the array */
@@ -623,8 +622,6 @@ function submitGuess() {
 
     // =========================================================
 
-
-
     if (guesses < 7 && validWord == true) {
         // this for loop finds correct letters in correct spots, 
         // then replaces that letter in wordCheck with an underscore
@@ -632,14 +629,11 @@ function submitGuess() {
         for (let col = 0; col < 5; col++) {
             let rowID = `r${guesses}c${col}`;
             let letterSq = document.getElementById(rowID).innerHTML;
-            if (letterSq === word[col]) {
-                wordCheck = wordCheck.replace(letterSq, "_");
-            }
+            if (letterSq === word[col]) wordCheck = wordCheck.replace(letterSq, "_");
         }
 
         // This for loop does the actual verification.
         for (let col = 0; col < 5; col++) {
-            
             let rowID = `r${guesses}c${col}`;
             let letterSq = document.getElementById(rowID).innerHTML;
             let keyboardBtnID = `btn${letterSq}`;
@@ -647,117 +641,27 @@ function submitGuess() {
             // Turn square green if the letters match in the square and word
             if (word[col] === letterSq) {
                 correctCount++;
-
-                if (soundOn) {
-                    setTimeout(() => {
-                        squareAudio.play();
-                    }, delayCounter);
-                }
-
                 shareSquares("rightSpot");
-                
-                let square = document.getElementById(rowID);
-
-                let squareBackgroundColor = square.style.backgroundColor;
-                square.animate({
-                    backgroundColor: [squareBackgroundColor, colorRightSpot]
-                }, {
-                    delay: delayCounter,            
-                    easing: "ease-in-out", 
-                    duration: 1000,      
-                    iterationCount: 1,    
-                    fill: "forwards",
-                });
-                
-                let keyboardButton = document.getElementById(keyboardBtnID);
-                keyboardButton.style.setProperty('--delayTime', delayCounter);
-                keyboardButton.classList.add("bgColorRS");
-
-
-                if (correctCount == 5) {
-                    for (let winCol = 0; winCol < 5; winCol++) {
-                        let winRowID = `r${guesses}c${winCol}`;
-                        let winSquare = document.getElementById(winRowID);
-                        winSquare.animate({
-                            transform: ['translateY(0em)', 'translateY(-.6em)', 'translateY(0em)'],
-                            borderBottomColor: [winSquareBorderColor, winSquareBorderColor, winSquareBorderColor],
-                            borderTopColor: [winSquareBorderColor, winSquareBorderColor, winSquareBorderColor],
-                            borderLeftColor: [winSquareBorderColor, winSquareBorderColor, winSquareBorderColor],
-                            borderRightColor: [winSquareBorderColor, winSquareBorderColor, winSquareBorderColor],
-                            //transform: 'rotate(360deg)',
-                        }, {
-                            delay: 1500 + winCol * 100,            
-                            easing: "ease-in-out", 
-                            duration: 600,      
-                            iterationCount: 1,    
-                            fill: "forwards",
-                        });
-                    }
-
-                    gameOver('won', 2000);
-
-                }
+                animateSquaresAndKeyboard(rowID, keyboardBtnID, 1);
+                if (correctCount == 5) gameOver('won', 2000);
             }
 
             // Make square yellow if wordCheck contains the letter.
             // This allows for words with more than one of the same letter.
             else if (wordCheck.includes(letterSq)) {
-                correctCount = 0;
-                if (soundOn) {
-                    setTimeout(() => {
-                        squareAudio.play();
-                    }, delayCounter);
-                }
                 shareSquares("rightLetter");
                 wordCheck = wordCheck.replace(letterSq, "_");
-                let square = document.getElementById(rowID);
-
-                let squareBackgroundColor = square.style.backgroundColor;
-                square.animate({
-                    backgroundColor: [squareBackgroundColor, colorRightLetter]
-                }, {
-                    delay: delayCounter,            
-                    easing: "ease-in-out", 
-                    duration: 1000,      
-                    iterationCount: 1,    
-                    fill: "forwards",
-                });
-
-                let keyboardButton = document.getElementById(keyboardBtnID);
-                keyboardButton.style.setProperty('--delayTime', delayCounter);
-                keyboardButton.classList.add("bgColorRL");
-                keyboardButton.classList.remove("bgColorRS");
-
+                animateSquaresAndKeyboard(rowID, keyboardBtnID, 2);
             }
 
             // If the word does not contain the letter, then:
             // The square is gray and the keyboard button is disabled.
             // If the word DOES contain the letter, the next 'else if' is run.
             else if (word.includes(letterSq) == false) {
-                if (soundOn) {
-                    setTimeout(() => {
-                        squareAudio.play();
-                    }, delayCounter);
-                }
                 correctCount = 0;
                 wrongLetters.push(letterSq);
                 shareSquares("gray");
-                let square = document.getElementById(rowID);
-                let squareBackgroundColor = square.style.backgroundColor;
-                square.animate({
-                    backgroundColor: [squareBackgroundColor, colorWrong]
-                }, {
-                    delay: delayCounter,            
-                    easing: "ease-in-out", 
-                    duration: 1000,      
-                    iterationCount: 1, 
-                    fill: "forwards",   
-                });
-                
-                let keyboardButton = document.getElementById(keyboardBtnID);
-                keyboardButton.style.setProperty('--delayTime', delayCounter);
-                keyboardButton.classList.add("keyboardLetterGrayedOut");
-
+                animateSquaresAndKeyboard(rowID, keyboardBtnID, 3);
             }
 
             // If the word DOES contain the letter (and previous 'else if' is bypassed) BUT the wordCheck does NOT,
@@ -765,45 +669,85 @@ function submitGuess() {
             // This is because the word has more than one of the same letter.
             // This accounts for the user entering multiples of the same letter.
             else if (wordCheck.includes(letterSq) == false) {
-                if (soundOn) {
-                    setTimeout(() => {
-                        squareAudio.play();
-                    }, delayCounter);
-                }
                 correctCount = 0;
                 shareSquares("gray");
-                let square = document.getElementById(rowID);
-                let squareBackgroundColor = square.style.backgroundColor;
-                square.animate({
-                    backgroundColor: [squareBackgroundColor, "rgb(129, 129, 129)"]
-                }, {
-                    delay: delayCounter,            
-                    easing: "ease-in-out", 
-                    duration: 1000,      
-                    iterationCount: 1,    
-                    fill: "forwards",
-                });
+                animateSquaresAndKeyboard(rowID, keyboardBtnID, 4);
             }  
-            delayCounter += 300;
         }
 
         wordCheck = word;
 
-        if (guesses == 6 && correctCount < 5) {
-            gameOver('lost', 2000);
-        }
+        if (guesses == 6 && correctCount < 5) gameOver('lost', 2000);
     }
-    else {
+    else { // this else section clears the squares if the word isn't valid
         for (let col = 0; col < 5; col++) {
             let rowID = `r${guesses}c${col}`;
             document.getElementById(rowID).innerHTML = "";
-
         }
         letterCol = 4;
         letterRow--;
         guesses--;
     }
 }
+
+
+
+// ==========================================================================================================
+
+//                                                                      Animate Squares and Keyboard Function
+
+// ==========================================================================================================
+
+const animateSquaresAndKeyboard = (rowID, keyboardBtnID, correctSpotID) => {
+    let square = document.getElementById(rowID);
+    let squareBackgroundColor = square.style.backgroundColor;
+    let colorToAnimate;
+    let keyboardColorClassToAdd;
+    let keyboardButton = document.getElementById(keyboardBtnID);
+    keyboardButton.style.setProperty('--delayTime', delayCounter);
+
+
+    if (soundOn) {
+        setTimeout(() => {
+            squareAudio.play();
+        }, delayCounter);
+    }
+
+    if (correctSpotID === 1) {
+        colorToAnimate = colorRightSpot;
+        keyboardColorClassToAdd = "bgColorRS";
+    } 
+    if (correctSpotID === 2) {
+        colorToAnimate = colorRightLetter;
+        keyboardColorClassToAdd = "bgColorRL";
+    }
+    if (correctSpotID === 3) {
+        colorToAnimate = colorWrong;
+        keyboardColorClassToAdd = "keyboardLetterGrayedOut";
+    }
+    if (correctSpotID === 4) {
+        colorToAnimate = colorWrong;
+    }
+
+    square.animate({
+        backgroundColor: [squareBackgroundColor, colorToAnimate]
+    }, {
+        delay: delayCounter,            
+        easing: "ease-in-out", 
+        duration: 1000,      
+        iterationCount: 1,    
+        fill: "forwards",
+    });
+
+    keyboardButton.classList.add(keyboardColorClassToAdd);
+
+    if (gameLevelMode == 'Free Play') delayCounter += 300;
+    // if the game mode is hard or expert, then the animation is almost immediate.
+    // otherwise, in free play, the animation delays for each square and key.
+}
+
+
+
 
 // ==========================================================================================================
 
@@ -815,6 +759,7 @@ const gameOver = (wonOrLost, gameOverDelay) => {
     clearInterval(timerVar);
     clearInterval(countDown);
     disableIcon(headingRow);
+
     let gameOverMsg = document.getElementById("gameOverMsg");
     let linkString = "https://www.dictionary.com/browse/" + word;
     let word_link = document.createElement("a");
@@ -826,6 +771,26 @@ const gameOver = (wonOrLost, gameOverDelay) => {
     par.appendChild(word_link);
 
     if (wonOrLost === 'won') {
+        for (let winCol = 0; winCol < 5; winCol++) {
+            let delayTimeForWinAnimation = 800 + winCol * 100;
+            if (gameLevelMode == 'Free Play') delayTimeForWinAnimation = 1500 + winCol * 100;
+            let winRowID = `r${guesses}c${winCol}`;
+            let winSquare = document.getElementById(winRowID);
+            winSquare.animate({
+                transform: ['translateY(0em)', 'translateY(-.6em)', 'translateY(0em)'],
+                borderBottomColor: [winSquareBorderColor, winSquareBorderColor, winSquareBorderColor],
+                borderTopColor: [winSquareBorderColor, winSquareBorderColor, winSquareBorderColor],
+                borderLeftColor: [winSquareBorderColor, winSquareBorderColor, winSquareBorderColor],
+                borderRightColor: [winSquareBorderColor, winSquareBorderColor, winSquareBorderColor],
+                //transform: 'rotate(360deg)',
+            }, {
+                delay: delayTimeForWinAnimation,            
+                easing: "ease-in-out", 
+                duration: 600,      
+                iterationCount: 1,    
+                fill: "forwards",
+            });
+        }
         document.getElementById("gameOver").style.backgroundColor = colorRightSpot;
         gameOverMsg.innerHTML = "You WIN!";
         firstShareLine = "Wurtle in ";
@@ -836,24 +801,23 @@ const gameOver = (wonOrLost, gameOverDelay) => {
         firstShareLine = "No Wurtle!";
     }
 
-    $(document).ready(function()
+    setTimeout(function()
     {
-        setTimeout(function()
-        {
-            if (wonOrLost === 'won' && soundOn) gameWonAudio.play();
-            document.getElementById("timer").style.opacity = "0";
-            document.getElementById("gameOverMsg").style.display = "block";
-            document.getElementById("showWord").style.display = "block";
-            document.getElementById("gameOver").style.display = "block";
-            document.getElementById("keyboard").style.display = "none";
-        }, 
-        gameOverDelay);
-    });   
+        if (wonOrLost === 'won' && soundOn) gameWonAudio.play();
+        document.getElementById("timer").style.opacity = "0";
+        document.getElementById("gameOverMsg").style.display = "block";
+        document.getElementById("showWord").style.display = "block";
+        document.getElementById("gameOver").style.display = "block";
+        document.getElementById("keyboard").style.display = "none";
+    }, 
+    gameOverDelay);
+ 
     
 
     setTimeout(function(){
         printShareSquares();
         document.getElementById("shareResults").style.display = "block";
+        document.getElementById("BtnNewGame").style.pointerEvents = 'auto';
     }, (gameOverDelay + 600));
 }
 
@@ -1389,6 +1353,7 @@ function resetGame() {
     wordCheck = word;
     console.log(word);
     let eraseTime = 0;
+    document.getElementById("BtnNewGame").style.pointerEvents = 'none';
 
     
     for (let ii = 0; ii < lettersPressed.length; ii++) {

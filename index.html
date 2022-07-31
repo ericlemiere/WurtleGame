@@ -89,17 +89,20 @@
 
 <!-- SETTINGS DIV -->
                 <div class="directions" id="settings">
-                    <h2 id="" style="text-align: center;">Choose your level:</h2><br>
+                    <!-- <div class="closeWindowX" id="closeWindowX" onclick="showDiv(1, 'settings', 'settingsGear')"><i class="fa-solid fa-circle-xmark"></i></div> -->
+                    <h2 id="" style="text-align: center;">Choose your level:</h2>
+                    <br><br>
                     <div id="gameLevelSelectors">
-                        <button class="Btn gameLevelBtn gameLevelBtnSelected" id="gameLevel0" onclick="gameLevelSelector(0)">Free Play: No time restrictions.</button>
-                        <button class="Btn gameLevelBtn" id="gameLevel60" onclick="gameLevelSelector(60)">Hard: 60 seconds</button>
-                        <button class="Btn gameLevelBtn" id="gameLevel30" onclick="gameLevelSelector(30)">Expert: 30 seconds</button>
+                        <button class="Btn gameLevelBtn gameLevelBtnSelected" id="gameLevel0" onclick="gameLevelSelector(0)"><b>Free Play:</b> No time restrictions</button>
+                        <button class="Btn gameLevelBtn" id="gameLevel60" onclick="gameLevelSelector(60)"><b>Hard:</b> 60 seconds</button>
+                        <button class="Btn gameLevelBtn" id="gameLevel30" onclick="gameLevelSelector(30)"><b>Expert:</b> 30 seconds</button>
                     </div>
                     
 
                     <br>
                     <!-- <div class="soundIcons soundIconSelected" id="soundOff" onclick="toggleSound('off')"><i class="fa-solid fa-volume-xmark soundIcon"></i></div>
-                    <div class="soundIcons" id="soundOn" onclick="toggleSound('on')"><i class="fa-solid fa-volume-high soundIcon"></i></div> -->
+                    <div class="soundIcons" id="soundOn" onclick="toggleSound('on')"><i class="fa-solid fa-volume-high soundIcon"></i></div>
+                     -->
                     <br>
                     <button class="Btn closeDirections" onclick="showDiv(1, 'settings', 'settingsGear')">Close</button>
 
@@ -182,7 +185,7 @@
                 <br>
                 <h1 id="gameOverMsg"></h1>
                 <h2 id="showWord"></h2>
-                <button class="Btn BtnNewGame" onclick="resetGame();">Play Again</button>
+                <button class="Btn BtnNewGame" id="BtnNewGame" onclick="resetGame();">Play Again</button>
             </div>
 
 <!-- KEYBOARD -->

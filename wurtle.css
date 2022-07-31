@@ -315,7 +315,7 @@ table { text-align: center;}
     border-color: rgb(189,189,189);
     margin-bottom: 20px;
     font-size: 1.2em;
-    font-style: italic;
+    font-style: bold;
     border-radius: 3px;
     box-shadow: 2px 2px 8px black;
     cursor: pointer;
@@ -344,6 +344,11 @@ table { text-align: center;}
     color: black;
     background-color: var(--wrong);
     border: 1px solid var(--wrong);
+}
+
+.gameLevelBtn:focus {
+    background-color: rgb(255, 255, 255);
+    color: black;
 }
 
 .gameLevelBtnSelected {
@@ -379,6 +384,19 @@ table { text-align: center;}
     float: inherit;
     /* margin-right: 15px; */
     padding: 8px 18px 8px 18px;
+}
+
+#BtnNewGame {
+    pointer-events: none;
+}
+
+.closeWindowX {
+    font-size: 1.5rem;
+    color: var(--wrong);
+    cursor: pointer;
+    position: absolute;
+    top: 5%;
+    right: 5%;
 }
 
 #shareIcon {
